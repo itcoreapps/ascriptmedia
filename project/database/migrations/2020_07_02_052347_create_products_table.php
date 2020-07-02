@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateProductsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('products', function (Blueprint $table) {
+            $table->integer('p_id')->autoIncrement();
+            $table->string('p_name');
+            $table->float('p_price_egp' , 8 ,2);
+            $table->float('p_price_dollar' , 8 ,2);
+            $table->float('p_price_bitcoins' , 8 , 8);
+            $table->string('p_image');
+            $table->string('p_video');
+            $table->integer('p_sales');
+            $table->string('p_description');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('products');
+    }
+}
