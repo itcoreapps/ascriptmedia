@@ -14,15 +14,18 @@ class CreateProductsTable extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->integer('p_id')->autoIncrement();
+            $table->integer('id')->autoIncrement();
             $table->string('p_name');
             $table->float('p_price_egp' , 8 ,2);
             $table->float('p_price_dollar' , 8 ,2);
             $table->float('p_price_bitcoins' , 8 , 8);
-            $table->string('p_image');
             $table->string('p_video');
-            $table->integer('p_sales');
+            $table->integer('num_of_sales');
             $table->string('p_description');
+            $table->integer('cat_id');
+            // $table->foreign('cat_id')->references('cat_id')->on('products');
+
+        
             $table->timestamps();
         });
     }
