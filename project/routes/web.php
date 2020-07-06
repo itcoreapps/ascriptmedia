@@ -25,9 +25,6 @@ Route::namespace('Backend')->prefix('dashboard')->group(function(){
     
     Route::resource('products','ProductsController')->except(['show','delete']);
     Route::delete('products/delete/{id}','ProductsController@delete')->name('dashboard/products.delete');
-
-
-
     
 });
 
