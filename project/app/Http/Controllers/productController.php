@@ -20,8 +20,9 @@ class productController extends Controller
 // foreach ($pro as $b) {
 //     echo $b->image[0]->img_path;
 // }
+        //dd($pro);
         
-        return view('index')->with('products',$pro);
+return view('index')->with('products',$pro);
       
     }
 

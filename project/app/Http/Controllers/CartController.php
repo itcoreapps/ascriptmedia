@@ -12,44 +12,49 @@ class CartController extends Controller
 {
     //show cart
     public function index(){
-      $cart = Cart::session(Auth::id())->getContent();
+      $cart = Cart::session(1)->getContent();
      // return $cart;
        return view('cart', ['cart' => $cart]);
     }
     //add item to cart 
     public function add(Request $req){
-
-    	$Product = Product::find($req->product_id);        	
-        $image = $Product->image()->first();
+      $imageCart="";
+    	$Product = Product::find($req->product_id); 
+      if($Product->image()->first() != null){       	
+       $image=$Product->image()->first();
+        //dd($image);
+        $imageCart=$image->img_path;
+       }
        
-        Cart::session(Auth::id())->add(array(
-        'id' => $Product->p_id,
+        Cart::session(1)->add(array(
+        'id' => $Product->id,
         'name' => $Product->p_name,
-        'price' => $Product->p_price_dollar,
-        'priceBitcoin'=>$Product->p_price_bitcoins,
-        'priceEgy'=>$Product->p_price_egp,
-        'quantity' => 1,
-        'image'=>$image->img_path,
-        'attributes' => array(),
+        'price' => $Product->p_price_dollar,        
+        'quantity' => 1,        
+        'attributes' => array(
+        'priceBitcoin' =>$Product->p_price_bitcoins ,
+        'priceEgy' => $Product->p_price_egp,
+        'image'=>$imageCart
+        ),
         'associatedModel' => $Product
         ));
        
 
-          $cart = Cart::session(Auth::id())->getContent();
-      
-         return response()->json(['your item added to cart']);
+          $cart = Cart::session(1)->getContent();
+
+          // $count=$cart->count();
+    
+         return back();
 
        
+    
 
     }
 
     /////////// update qty for item in cart
     public function update(Request $req){
-       $validatedData = $request->validate([
-        'qty' => 'required|numeric',
-        'item_id' => 'required',
-       ]);
-    	Cart::session(Auth::id())->update($req->item_id,array(
+      
+    	Cart::session(1)->update($req->item_id,array(
      
         'quantity' => array(
         'relative' => false,
@@ -61,8 +66,8 @@ class CartController extends Controller
     }
     ////***** delete item from cart ************
     public function removeItem($id){
-      Cart::session(Auth::id())->remove($id);
-      $cart = Cart::session(Auth::id())->getContent();
+      Cart::session(1)->remove($id);
+      $cart = Cart::session(1)->getContent();
      return back(); 
 
     }

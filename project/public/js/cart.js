@@ -4,22 +4,11 @@ $(document).ready(function() {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
         });
-
+//         var count='{{ \Cart::session(1)->getContent()->count() }} ';  
+// $(".qtyCt").append(count);
         
     // use class selector instead of ID
-    $(".addTcart").on('click', function(evt) {
-       // take only current clicked data element
-       var link_data = $(this).data('data');
-       $.ajax({
-          type: "POST",
-          url: 'addToCart',
-          data: ({product_id: link_data}),
-          success: function(data) {
-            alert(data);
-          }   
-       });   
     
-});
     ///////////////////////////////////////////
      $('form.updateCart').bind('submit', function () {
          var item_id=$('input[name ="item_id"]').val();

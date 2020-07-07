@@ -10,4 +10,13 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+
+     public function __construct()
+    {
+    	//$id=Auth::id();
+        //$cart = \Cart::session(1)->getContent();
+       
+        // View::share('cart', $cart);
+    }
 }

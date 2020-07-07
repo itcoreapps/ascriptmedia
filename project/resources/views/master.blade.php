@@ -107,20 +107,26 @@
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Your Cart</span>
-										<div class="qty">{{\Cart::session(1)->getContent()->count()}}</div>
+										<div class="qty qtyCt">{{ \Cart::session(1)->getContent()->count() }}</div>
 									</a>
 									<div class="cart-dropdown">
 										<div class="cart-list">
 											@foreach(\Cart::session(1)->getContent() as $item)
 											<div class="product-widget">
-												<div class="product-img">
-													<img src="./img/{{$item->image}}" alt="">
+												<div class="product-img ">
+													@if( $item->attributes->has('image') )
+    {
+													<img src="./img/{{$item->attributes->image}}" alt="">
+													@endif
 												</div>
 												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name: {{$item->name}}
+													<h3 class="product-name "><a href="#">product name: {{$item->name}}
 item</a></h3>
-													<h4 class="product-price"><span class="qty">{{$item->quantity}}x</span>${{$item->price}}</h4>
-													 <span class="qty">bit coin {{$item->priceBitcoin}}</span>
+													<h4 class="product-price"><span class="qty qtyCt">{{$item->quantity}}x</span>${{$item->price}}</h4>
+													@if( $item->attributes->has('priceBitcoin') )
+    
+													 <span class="qty">bit coin {{$item->attributes->priceBitcoin}}</span>
+													 @endif
 												</div>
 
 												<a class="delete " id="{{$item->id}}" href="cart/delete/{{$item->id}}"><i class="fa fa-close"></i></a>

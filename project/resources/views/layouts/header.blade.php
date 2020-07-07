@@ -79,7 +79,10 @@
                                         <div class="product-body">
                                             <h3 class="product-name"><a href="#">product name: {{$item->name}}</a></h3>
                                             <h4 class="product-price"><span class="qty">{{$item->quantity}}x</span>${{$item->price}}</h4>
-                                             <span class="qty">bit coin {{$item->priceBitcoin}}</span>
+                                             @if( $item->attributes->has('priceBitcoin') )
+    
+                                                     <span class="qty">bit coin {{$item->attributes->priceBitcoin}}</span>
+                                                     @endif
                                         </div>
                                         <a class="delete " id="{{$item->id}}" href="cart/delete/{{$item->id}}"><i class="fa fa-close"></i></a>
                                     </div>

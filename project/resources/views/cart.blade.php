@@ -29,15 +29,21 @@
               <tbody style="overflow: auto">
                 @foreach($cart as $item)
                 <tr>
-                   <td > <img src="./img/{{$item->image}}" class="rounded mx-auto d-block" alt="..." width="100px" height="100px">
-                                    
+                   <td > 
+                    @if( $item->attributes->has('image') )
+                    <img src="./img/{{$item->attributes->image}}" class="rounded mx-auto d-block" alt="..." width="100px" height="100px">
+                          @endif          
 
 </td> 
                    <td >{{$item->name}}</td>
 <!--                    price all 
  -->               <td ><b> $ </b>{{$item->price}} </td>
-                   <td ><b> BitCoin</b><br>{{$item->priceBitcoin}}</td>
-                   <td ><b> egp </b><br> {{$item->priceEgy}}</td>   
+                   @if( $item->attributes->has('priceBitcoin') )
+                   <td ><b> BitCoin</b><br>{{number_format($item->attributes->priceBitcoin,7)}}</td>
+                   @endif
+                   @if( $item->attributes->has('priceEgy') )
+                   <td ><b> egp </b><br> {{number_format($item->attributes->priceEgy,2)}}</td> 
+                   @endif  
                    <td >
  <form class="form-horizontal updateCart" role="form"  >
                      
@@ -50,9 +56,12 @@
                      <input type="number" name="qty" value="{{$item->quantity}}" class="form-control">
                     </td>
                     <td ><b> $</b> {{$item->getPriceSum()}}   </td>
-                    <td > <b>egp </b><br>{{$item->getPriceEgySum()}} </td>
-                    <td > <b>BitCoin</b> <br>{{$item->getPriceBitSum()}} </td>
-
+                    @if( $item->attributes->has('priceEgy') )
+                    <td > <b>egp </b><br>{{number_format($item->attributes->priceEgy * $item->quantity,2)}} </td>
+                    @endif
+                    @if( $item->attributes->has('priceBitcoin') )
+                    <td > <b>BitCoin</b> <br>{{number_format($item->attributes->priceBitcoin * $item->quantity,7)}} </td>
+                    @endif
 
                     <td > 
                     <div class=" btn-group btn-group-sm"  role="group">  
@@ -82,14 +91,19 @@
 
                     <b> Items: </b>  {{$cart->count()}}<br>
                      <b>SubTotal dollar :  </b>  $ {{\Cart::getSubTotal()}}<br>
-                     <b>SubTotal Bitcoin :  </b>  {{\Cart::getSubBitTotal()}}<br>
-                     <b>SubTotal egp :   </b> {{\Cart::getSubEgyTotal()}}<br>
+                      @if( $item->attributes->has('priceBitcoin') )
+                     <b>SubTotal Bitcoin :  </b>  {{number_format($item->attributes->priceBitcoin * $item->quantity * $cart->count(),7)}}<br>
+                      @endif
+                     @if( $item->attributes->has('priceEgy') )
+                     <b>SubTotal egp :   </b> {{number_format($item->attributes->priceEgy * $item->quantity * $cart->count(),2) }}<br>
+                      @endif
                    </td>
                  </tr>
               </tfoot>
           </table>
         </div>
-          <a href='{{url("shipping")}}' class="btn btn-danger ">Checkout <i class="fa fa-arrow-circle-right"></i></a>
+          <a href='{{url("shipping")}}' class="btn btn-danger "> <i class="fa fa-arrow-circle-left">
+   Checkout </i></a> <a href='{{url("/")}}' class="btn btn-danger " style="float:right;">continue shopping <i class="fa fa-arrow-circle-right"></i></a>
           <hr>
           @endif
  </div> </div> </div>
