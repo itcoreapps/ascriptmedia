@@ -58,7 +58,7 @@
 												<!-- product -->
 												<div class="product">
 													<div class="product-img">
-														<img src="./img/{{$product->p_image}}" alt="">
+														<img src="./img/{{$product->image[0]->img_path}}" alt="">
 														<!--<div class="product-label">
 															<span class="sale">-30%</span>
 															<span class="new">NEW</span>
@@ -67,7 +67,7 @@
 													<div class="product-body">
 														<p class="product-category">Category</p>
 														<h3 class="product-name"><a href="/{{$product->p_id}}">{{$product->p_name}}</a></h3>
-														<h4 class="product-price">EGP {{$product->p_price_egp}} </h4>
+														<h4 class="product-price">  {{$product->p_price_egp}} </h4>
 														<h4 class="product-price">$ {{$product->p_price_dollar}} </h4>
 														<h4 class="product-price"><span class="fa fa-btc" aria-hidden="true"></span>{{$product->p_price_bitcoins}}</h4>
 														<!--<div class="product-rating">
@@ -85,7 +85,7 @@
 														</div>
 													</div>
 													<div class="add-to-cart">
-														<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+														<button class="add-to-cart-btn addTcart" data-data='1{{$product->p_id}}'><i class="fa fa-shopping-cart"></i> add to cart</button>
 													</div>
 												</div>
 												<!-- /product -->
@@ -124,7 +124,7 @@
 					<!-- ASIDE -->
 					<div id="aside" class="col-md-3">
 						<!-- aside Widget -->
-						<!--<div class="aside">
+						<div class="aside">
 							<h3 class="aside-title">Categories</h3>
 							<div class="checkbox-filter">
 
@@ -182,7 +182,7 @@
 									</label>
 								</div>
 							</div>
-						</div>-->
+						</div>
 						<!-- /aside Widget -->
 
 						<!-- aside Widget -->

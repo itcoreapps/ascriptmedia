@@ -12,7 +12,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/////////// cart route//////////////////
+Route::post('addToCart','CartController@add' )->middleware('auth');
+Route::get('cart','CartController@index' )->middleware('auth');
+Route::any('cart/update','CartController@update' )->middleware('auth');
+Route::get('cart/delete/{id}','CartController@removeItem' )->middleware('auth');
+/////////////////////////////
 Route::namespace('Backend')->prefix('dashboard')->group(function(){
 
     Route::get('home','HomeController@index');
