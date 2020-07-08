@@ -85,11 +85,9 @@
 														</div>
 													</div>
 													<div class="add-to-cart">
-														<form action="addToCart" method="POST">
-															@csrf
-															<input type="hidden" name="product_id" value="{{$product->id}}">
-														<button class="add-to-cart-btn " data-data=''><i class="fa fa-shopping-cart"></i>ok add to cart</button>
-														</form>
+														
+														<button class="add-to-cart-btn addTcart" data-data='{{$product->id}}'><i class="fa fa-shopping-cart"></i> add to cart</button>
+														
 													</div>
 												</div>
 												<!-- /product -->

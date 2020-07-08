@@ -8,7 +8,22 @@ $(document).ready(function() {
 // $(".qtyCt").append(count);
         
     // use class selector instead of ID
+        $(".addTcart").on('click', function(evt) {
+       // take only current clicked data element
+       var link_data = $(this).data('data');
+       $.ajax({
+          type: "POST",
+          url: 'addToCart',
+          data: ({product_id: link_data}),
+          success: function(data) {
+             
+            //var count=data;
+            $("div #qtyCt").text(data.count);
+            alert("your item has added to cart");
+          }
+       });   
     
+});
     ///////////////////////////////////////////
      $('form.updateCart').bind('submit', function () {
          var item_id=$('input[name ="item_id"]').val();

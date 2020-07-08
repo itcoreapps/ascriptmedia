@@ -103,9 +103,13 @@
           </table>
         </div>
           <a href='{{url("shipping")}}' class="btn btn-danger "> <i class="fa fa-arrow-circle-left">
-   Checkout </i></a> <a href='{{url("/")}}' class="btn btn-danger " style="float:right;">continue shopping <i class="fa fa-arrow-circle-right"></i></a>
-          <hr>
+   Checkout </i></a> 
           @endif
- </div> </div> </div>
+
+ </div>
+<a href='{{url("/")}}' class="btn btn-danger " style="float:right;">continue shopping <i class="fa fa-arrow-circle-right"></i></a>
+          <hr>
+
+  </div> </div>
 
 @endsection

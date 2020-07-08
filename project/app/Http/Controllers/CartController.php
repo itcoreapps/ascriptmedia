@@ -12,13 +12,15 @@ class CartController extends Controller
 {
     //show cart
     public function index(){
-      $cart = Cart::session(1)->getContent();
-     // return $cart;
-       return view('cart', ['cart' => $cart]);
+      $cart2 = Cart::session(Auth::id())->getContent();
+     
+      $cart=$cart2->sortKeys();
+   
+     return view('cart', ['cart' => $cart]);
     }
-    //add item to cart 
+    ////////////////////////////add item to cart 
     public function add(Request $req){
-      $imageCart="";
+      $imageCart="img";
     	$Product = Product::find($req->product_id); 
       if($Product->image()->first() != null){       	
        $image=$Product->image()->first();
@@ -26,7 +28,7 @@ class CartController extends Controller
         $imageCart=$image->img_path;
        }
        
-        Cart::session(1)->add(array(
+        Cart::session(Auth::id())->add(array(
         'id' => $Product->id,
         'name' => $Product->p_name,
         'price' => $Product->p_price_dollar,        
@@ -40,11 +42,9 @@ class CartController extends Controller
         ));
        
 
-          $cart = Cart::session(1)->getContent();
-
-          // $count=$cart->count();
-    
-         return back();
+          
+          $count=$cart->count();
+         return response()->json($count);
 
        
     
@@ -54,20 +54,20 @@ class CartController extends Controller
     /////////// update qty for item in cart
     public function update(Request $req){
       
-    	Cart::session(1)->update($req->item_id,array(
+    	Cart::session(Auth::id())->update($req->item_id,array(
      
         'quantity' => array(
         'relative' => false,
         'value' => request('qty'),
         )));
-        $cart = Cart::session(1)->getContent();
+        $cart = Cart::session(Auth::id())->getContent();
     	
         return response()->json(['your item updated to cart']); 
     }
     ////***** delete item from cart ************
     public function removeItem($id){
-      Cart::session(1)->remove($id);
-      $cart = Cart::session(1)->getContent();
+      Cart::session(Auth::id())->remove($id);
+      $cart = Cart::session(Auth::id())->getContent();
      return back(); 
 
     }
