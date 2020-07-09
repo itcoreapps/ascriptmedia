@@ -13,7 +13,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// --------------------------  Route For Dashboard -------------------------------//
+/////////// cart route//////////////////
+Route::post('addToCart','CartController@add' );
+Route::get('cart','CartController@index' );
+Route::post('cart/update','CartController@update' );
+Route::get('cart/delete/{id}','CartController@removeItem' );
+Route::get('cart/destroy','CartController@destroy' );
+/////////////////////////////
 Route::namespace('Backend')->prefix('dashboard')->group(function(){
     // Route::namespace('Backend')->prefix('dashboard')->middleware('admin')->group(function(){
 

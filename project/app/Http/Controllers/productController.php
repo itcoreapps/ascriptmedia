@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\product;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class productController extends Controller
@@ -13,10 +13,16 @@ class productController extends Controller
      */
     public function index()
     {
-        
-        $pro=product::get();
+               
+        $pro=Product::all();
+
+
+// foreach ($pro as $b) {
+//     echo $b->image[0]->img_path;
+// }
         //dd($pro);
-        return view('index')->with('products',$pro);
+        
+return view('index')->with('products',$pro);
       
     }
 
@@ -50,7 +56,7 @@ class productController extends Controller
     public function show($id)
     {
       //  dd("cjbdskcbdsc");
-        $pro=product::find($id);
+        $pro=Product::find($id);
         return view('product')->with('product',$pro);
     }
 

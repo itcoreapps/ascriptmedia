@@ -1,4 +1,15 @@
 <?php return array (
+  'darryldecode/cart' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Darryldecode\\Cart\\CartServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Cart' => 'Darryldecode\\Cart\\Facades\\CartFacade',
+    ),
+  ),
   'facade/ignition' => 
   array (
     'providers' => 
@@ -22,6 +33,17 @@
     'providers' => 
     array (
       0 => 'Fruitcake\\Cors\\CorsServiceProvider',
+    ),
+  ),
+  'jenssegers/agent' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Jenssegers\\Agent\\AgentServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Agent' => 'Jenssegers\\Agent\\Facades\\Agent',
     ),
   ),
   'laravel/tinker' => 

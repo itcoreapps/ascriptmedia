@@ -4,6 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		 <meta name="csrf-token" content="{{ csrf_token() }}" />
 		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 		<title>Electro - HTML Ecommerce Template</title>
@@ -36,6 +37,7 @@
 
     </head>
 	<body>
+
 		<!-- HEADER -->
 		<header>
 			<!-- TOP HEADER -->
@@ -105,38 +107,38 @@
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Your Cart</span>
-										<div class="qty">3</div>
+										<div class="qty " id="qtyCt">{{ $cart->count() }}</div>
 									</a>
 									<div class="cart-dropdown">
 										<div class="cart-list">
+											@foreach(\Cart::getContent() as $item)
 											<div class="product-widget">
-												<div class="product-img">
-													<img src="./img/product01.png" alt="">
+												<div class="product-img  ">
+													@if( $item->attributes->has('image') )
+                                                    <img src="./img/{{$item->attributes->image}}" alt="" class="cartImg">
+                                                     @endif
 												</div>
 												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
+													<h3 class="product-name "><a href="#" class="cartName">product name: {{$item->name}}
+item</a></h3>
+													<h4 class="product-price"><span class="qty itemQ">{{$item->quantity}}x</span><span class="cartPrice">${{$item->price}}</span></h4>
+													@if( $item->attributes->has('priceBitcoin') )
+    
+													 <span class="bitPrice">bit coin {{$item->attributes->priceBitcoin}}</span>
+													 @endif
 												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
+
+												<a class="delete  delCart"  href="cart/delete/{{$item->id}}" ><i class="fa fa-close"></i></a>
 											</div>
 
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="./img/product02.png" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
+											@endforeach
 										</div>
 										<div class="cart-summary">
-											<small>3 Item(s) selected</small>
-											<h5>SUBTOTAL: $2940.00</h5>
+											<small>{{\Cart::session(1)->getContent()->count()}} Item(s) selected</small>
+											<h5>SUBTOTAL: ${{\Cart::getSubTotal()}}</h5>
 										</div>
 										<div class="cart-btns">
-											<a href="#">View Cart</a>
+											<a href="cart">View Cart</a>
 											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
 										</div>
 									</div>
@@ -273,7 +275,7 @@
 								<h3 class="footer-title">Service</h3>
 								<ul class="footer-links">
 									<li><a href="#">My Account</a></li>
-									<li><a href="#">View Cart</a></li>
+									<li><a href="cart">View Cart</a></li>
 									<li><a href="#">Wishlist</a></li>
 									<li><a href="#">Track My Order</a></li>
 									<li><a href="#">Help</a></li>
@@ -323,6 +325,7 @@
 		<script src="{{asset('js/nouislider.min.js')}}"></script>
 		<script src="{{asset('js/jquery.zoom.min.js')}}"></script>
 		<script src="{{asset('js/main.js')}}"></script>
+		<script src="{{asset('js/cart.js')}}"></script>
 
 	</body>
 </html>

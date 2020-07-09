@@ -90,7 +90,11 @@
                                         </div>
                                     </div>
                                     <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                        <div class="add-to-cart">
+
+                                                            
+                                        <button class="add-to-cart-btn addTcart" data-data='1{{$product->p_id}}'><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                    
                                     </div>
                                 </div>
                                 <!-- /product -->
@@ -115,7 +119,8 @@
                                         </div>
                                     </div>
                                     <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                        <div class="add-to-cart">
+                                                        <button class="add-to-cart-btn addTcart" data-data='{{$product->id}}'><i class="fa fa-shopping-cart"></i> add to cart</button>
                                     </div>
                                 </div>
                                 <!-- /product -->
@@ -143,7 +148,8 @@
                                         </div>
                                     </div>
                                     <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                       <div class="add-to-cart">
+                                                        <button class="add-to-cart-btn addTcart" data-data='{{$product->p_id}}'><i class="fa fa-shopping-cart"></i> add to cart</button>
                                     </div>
                                 </div>
                                 <!-- /product -->
@@ -171,7 +177,8 @@
                                         </div>
                                     </div>
                                     <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                        <div class="add-to-cart">
+                                                        <button class="add-to-cart-btn addTcart" data-data='{{$product->p_id}}'><i class="fa fa-shopping-cart"></i> add to cart</button>
                                     </div>
                                 </div>
                                 <!-- /product -->
