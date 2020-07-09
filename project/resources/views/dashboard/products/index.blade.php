@@ -46,6 +46,9 @@
                 Description
               </th>
               <th>
+                Images
+              </th>
+              <th>
                 Category
               </th>
               <th>
@@ -54,21 +57,35 @@
             </thead>
             <tbody>
               @foreach ($rows as $row)
+
+              
+              @php 
+              $images = DB::table('images')->where('p_id',$row->id)->get();
+              @endphp
               <tr>
-                  <td>{{$row->p_id}}</td>
+                  <td>{{$row->id}}</td>
+                  <td>{{$row->p_name}}</td>
                   <td>{{$row->p_price_egp}}</td>
                   <td>{{$row->p_price_dollar}}</td>
                   <td>{{$row->p_price_bitcoins}}</td>
-                  <td>{{$row->p_video}}</td>
+                  <td><a href="{{$row->p_video}}" target="_blank">{{$row->p_video}}</td>
                   <td>{{$row->num_of_sales}}</td>
                   <td>{{$row->p_description}}</td>
-                  <td>{{$row->cat->name}}</td>
+                  <td>
+                  @foreach($images as $image)
+                  
+                  {{-- @php dd($images) ; @endphp --}}
+                    <img height="150px" width="150px" style="padding:4px" src="{{ url('uploads/'.$image->img_path) }}" alt=""><br>
+
+                  @endforeach
+                  
+                  </td>
+                  <td class="text-primary">{{$row->cat->c_name}}</td>
 
                   <td class="text-primary" class="td-actions">
 
                     <!-- To make edit and delete buttoms is shared-->
                       @include('dashboard.shared.buttoms.edit')
-
                       @include('dashboard.shared.buttoms.delete')
                                        
                   </td>

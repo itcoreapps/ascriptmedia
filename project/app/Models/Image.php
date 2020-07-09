@@ -8,7 +8,8 @@ class Image extends Model
 {
     protected $fillable = [
         'img_path',
-        'p_id'
+        'p_id',
+        // 'img_id'
     ];
 
     public function product(){

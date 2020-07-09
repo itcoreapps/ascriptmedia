@@ -15,7 +15,7 @@
 
       @slot('slot')
       <div class="card-body">
-        <form action="{{route('categories.update',$row->id)}}" method="POST">
+        <form action="{{route('products.update',$row->id)}}" method="POST" enctype="multipart/form-data">
             {{ method_field('put')}}
             @include('dashboard.'.$routename.'.form')
             
@@ -25,6 +25,29 @@
         </div>
           
       @endslot
+
+      @slot('md4')
+          @php 
+          $images = DB::table('images')->where('p_id',$row->id)->get();
+          @endphp
+          
+            <div class="container">
+
+             @foreach ($images as $item)
+              {{-- @php dd($item->img_id); @endphp --}}
+              <img style="margin: 10px" width="330" height="200" src="{{ url('uploads/'.$item->img_path) }}" >
+            </div>
+
+            <form action="{{route('dashboard/image'.'.delete',['id' => $item->id])}}" method="POST">
+              @csrf
+              {{ method_field('delete')}}
+              <button type="submit" rel="tooltip" title="" class="btn btn-white btn-link btn-sm" data-original-title="Remove">
+                  <i class="material-icons">close</i>
+              </button>
+            </form>
+          @endforeach
+          
+        @endslot
       @endcomponent
     </div>
 </div>

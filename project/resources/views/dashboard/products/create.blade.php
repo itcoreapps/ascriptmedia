@@ -14,7 +14,7 @@
 
       @slot('slot')
         <div class="card-body">
-          <form action="{{route('products.store')}}" method="POST">
+          <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">
             @include('dashboard.'.$routename.'.form')
             
             <button type="submit" class="btn btn-primary pull-right">{{$pageTitle}}</button>

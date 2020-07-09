@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductsController extends BackEndController
 {
@@ -16,7 +17,7 @@ class ProductsController extends BackEndController
     }
 
     protected function with(){
-        return['cat'];
+        return['cat','image'];
     }
 
     protected function append(){
@@ -29,52 +30,67 @@ class ProductsController extends BackEndController
 
         return $array;
     }
-    protected function syncImage($row, $requestArray){
-
-        if(isset($requestArray['img_path']) && !empty($requestArray['img_path'])){ // to save skills with new row
-            $row->image()->sync($requestArray['img_path']);
-        }
-
-    }
-  
+    
     public function store(Store $request){
 
-        // dd($request->all());
-        $input = $request->all();
-        $image = array();
-
-        if($files = $request->File('img_path')){
-
+        // dd($request->img_path);
+        $item = Product::create($request->all());
+        $images = array();
+        if($files = $request->file('img_path')){
             foreach($files as $image){
-                $fileName = time().str_random(10).'.'.$image->getClientOriginalExtension();
-                $image->move(public_path('uploads'), $fileName);
-                $image[] = $fileName;
+                $name =time().str_random(10).'.'.$image->getClientOriginalExtension();
+                $image->move(public_path('uploads'), $name);
+                $images[] = $name;
 
+                Image::create([
+                    'p_id' => $item->id,
+                    'img_path' => $name
+                ]);
             }
         }
-        $this->model->create($request->all());
-        $requestArray = [
-            // 'user_id' => auth()->user()->id,    //this relation for user -> video
-            // 'image' => $fileName
-            Image::create([
-                'img_path' => implode("|",$image),
-                'p_id' => $request->id
-            ])
-        ] + $request->all(); 
         
-        // dd(Image::all());
-        
-        // dd($request->all());
-        
-        // $this->syncImage($row, $request->all());
+    
         return redirect('dashboard/products');
 
     }
 
     public function update($id, Store $request){
+        // dd($request->all());
+        $requestArray = $request->all();
+
+        // $images = array();
+        $pro_id = $id;
+
+        if($request->hasFile('img_path')){
+            $files = $request->file('img_path');
+            foreach($files as $image){
+                $name =time().str_random(10).'.'.$image->getClientOriginalExtension();
+                $image->move(public_path('uploads'), $name);
+                $images[] = $name;
+
+               Image::create([
+                    'p_id' => $pro_id,
+                    'img_path' => $name
+                ]);
+            }
+        }      
         $row = $this->model->findOrFail($id);
-    
-        $row->update($request->all());
+        
+        $row->update($requestArray);
         return redirect('dashboard/products');
+    }
+
+    public function deleteImage($id, Request $request){
+
+        // $img_id = $request->id;
+        $row = Image::findOrFail($id)->delete();
+    //  dd(Image::findOrFail($img_id)->delete());
+        return redirect('/dashboard/products');
+        // $images = DB::table('images')->where('p_id',$request->id)->get();
+
+        // // $row = $this->model->findOrFail($id)->delete();
+        // // return redirect('/dashboard/'.$this->plureModelName());
+
+        // dd($request->id);
     }
 }

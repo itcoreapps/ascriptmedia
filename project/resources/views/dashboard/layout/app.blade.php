@@ -60,5 +60,11 @@
   });
 
 </script>
+<style>
+  .hide
+  {
+    display: none !important;
+  } 
+</style>
 
 </html>
