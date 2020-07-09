@@ -10,7 +10,8 @@
             <h2>YOUR CART</h2>
             <div class="row">       
  @if(count($cart))
- <div class="table-responsive-md">
+
+ <div class="table-responsive-md  ">
            <table   class=" table-hover table table-striped table-bordered" style="width:100%; max-height: 500px;" id="cartTable">
               <thead class="thead-dark bg-info " style="background: #3e273b;color:#ffffff;">
                 <tr>
@@ -87,7 +88,7 @@
                  <hr>
                  <tr>
                    
-                     <td colspan="11" class="table-info">
+                     <td colspan="8" class="table-info">
 
                     <b> Items: </b>  {{$cart->count()}}<br>
                      <b>SubTotal dollar :  </b>  $ {{\Cart::getSubTotal()}}<br>
@@ -97,19 +98,19 @@
                      @if( $item->attributes->has('priceEgy') )
                      <b>SubTotal egp :   </b> {{number_format($item->attributes->priceEgy * $item->quantity * $cart->count(),2) }}<br>
                       @endif
-                   </td>
+                   </td><td colspan="3"> <a class="btn btn-danger "  href="cart/destroy" style="border-color: #000000;">delete all</a></td>
                  </tr>
               </tfoot>
           </table>
         </div>
-          <a href='{{url("shipping")}}' class="btn btn-danger "> <i class="fa fa-arrow-circle-left">
+          <a href='{{url("shipping")}}' class="btn btn-danger " style="float:right;"> <i class="fa fa-arrow-circle-right">
    Checkout </i></a> 
           @endif
 
- </div>
-<a href='{{url("/")}}' class="btn btn-danger " style="float:right;">continue shopping <i class="fa fa-arrow-circle-right"></i></a>
+ 
+<a href='{{url("/")}}' class="btn btn-danger " >continue shopping <i class="fa fa-arrow-circle-left"></i></a>
           <hr>
-
+</div>
   </div> </div>
 
 @endsection

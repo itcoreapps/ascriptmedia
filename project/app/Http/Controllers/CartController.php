@@ -6,17 +6,16 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 
 use Cart;
+
 use Illuminate\Support\Facades\Auth;
+
 
 class CartController extends Controller
 {
     //show cart
     public function index(){
-      $cart2 = Cart::session(Auth::id())->getContent();
      
-      $cart=$cart2->sortKeys();
-   
-     return view('cart', ['cart' => $cart]);
+      return view('cart');
     }
     ////////////////////////////add item to cart 
     public function add(Request $req){
@@ -28,7 +27,7 @@ class CartController extends Controller
         $imageCart=$image->img_path;
        }
        
-        Cart::session(Auth::id())->add(array(
+        Cart::add(array(
         'id' => $Product->id,
         'name' => $Product->p_name,
         'price' => $Product->p_price_dollar,        
@@ -42,7 +41,8 @@ class CartController extends Controller
         ));
        
 
-          
+        $cart = Cart::getContent();
+
           $count=$cart->count();
          return response()->json($count);
 
@@ -54,27 +54,27 @@ class CartController extends Controller
     /////////// update qty for item in cart
     public function update(Request $req){
       
-    	Cart::session(Auth::id())->update($req->item_id,array(
+    	Cart::update($req->item_id,array(
      
         'quantity' => array(
         'relative' => false,
         'value' => request('qty'),
         )));
-        $cart = Cart::session(Auth::id())->getContent();
+        $cart = Cart::getContent();
     	
         return response()->json(['your item updated to cart']); 
     }
     ////***** delete item from cart ************
     public function removeItem($id){
-      Cart::session(Auth::id())->remove($id);
-      $cart = Cart::session(Auth::id())->getContent();
+      Cart::remove($id);
+      $cart = Cart::getContent();
      return back(); 
 
     }
     ///************************** delete cart
     public function destroy(){
-      Cart::session(Auth::id())->clear();
-      return response()->json(['your item deleted to cart']); 
+      Cart::clear();
+      return back(); 
     }
    
 }

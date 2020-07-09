@@ -107,11 +107,11 @@
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Your Cart</span>
-										<div class="qty " id="qtyCt">{{ \Cart::session(1)->getContent()->count() }}</div>
+										<div class="qty " id="qtyCt">{{ $cart->count() }}</div>
 									</a>
 									<div class="cart-dropdown">
 										<div class="cart-list">
-											@foreach(\Cart::session(1)->getContent() as $item)
+											@foreach(\Cart::getContent() as $item)
 											<div class="product-widget">
 												<div class="product-img  ">
 													@if( $item->attributes->has('image') )

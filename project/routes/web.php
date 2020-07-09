@@ -13,10 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 /////////// cart route//////////////////
-Route::post('addToCart','CartController@add' )->middleware('auth');
-Route::get('cart','CartController@index' )->middleware('auth');
-Route::post('cart/update','CartController@update' )->middleware('auth');
-Route::get('cart/delete/{id}','CartController@removeItem' )->middleware('auth');
+Route::post('addToCart','CartController@add' );
+Route::get('cart','CartController@index' );
+Route::post('cart/update','CartController@update' );
+Route::get('cart/delete/{id}','CartController@removeItem' );
+Route::get('cart/destroy','CartController@destroy' );
 /////////////////////////////
 Route::namespace('Backend')->prefix('dashboard')->group(function(){
 

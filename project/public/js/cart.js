@@ -4,8 +4,7 @@ $(document).ready(function() {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
         });
-//         var count='{{ \Cart::session(1)->getContent()->count() }} ';  
-// $(".qtyCt").append(count);
+
         
     // use class selector instead of ID
         $(".addTcart").on('click', function(evt) {
@@ -18,7 +17,7 @@ $(document).ready(function() {
           success: function(data) {
              
             //var count=data;
-            $("div #qtyCt").text(data.count);
+            $("#qtyCt").text(data);
             alert("your item has added to cart");
           }
        });   
