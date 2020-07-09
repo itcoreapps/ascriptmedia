@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,7 @@ Route::get('cart/delete/{id}','CartController@removeItem' );
 Route::get('cart/destroy','CartController@destroy' );
 /////////////////////////////
 Route::namespace('Backend')->prefix('dashboard')->group(function(){
+    // Route::namespace('Backend')->prefix('dashboard')->middleware('admin')->group(function(){
 
     Route::get('home','HomeController@index');
     
@@ -31,9 +33,16 @@ Route::namespace('Backend')->prefix('dashboard')->group(function(){
     
     Route::resource('products','ProductsController')->except(['show','delete']);
     Route::delete('products/delete/{id}','ProductsController@delete')->name('dashboard/products.delete');
-    
-});
 
+    Route::delete('image/delete/{id}','ProductsController@deleteImage')->name('dashboard/image.delete');
+
+    Route::resource('orders','OrdersController')->except(['show','delete']);
+    Route::delete('orders/delete/{id}','OrdersController@delete')->name('dashboard/orders.delete');
+});
+// --------------------------  Route For Dashboard -------------------------------//
+Route::get('login',function(){
+    // return view('login');
+});
 Route::get('/','productController@index');
 Route::get('/{id}','productController@show');
 
@@ -52,3 +61,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

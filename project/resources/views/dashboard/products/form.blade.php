@@ -71,7 +71,7 @@
     <div class="input-group control-group increment">
         
             <label style="margin: 10px">Product Image</label>
-            <input type="file" class="form-control" value="{{ isset($row) ? $row->{$input} : '' }}" name="{{$input}}" required autofocus>
+            <input type="file" class="form-control" value="{{ isset($row) ? $row->{$input} : '' }}" name="{{$input}}" >
             <div class="input-group-btn"> 
                 <button class="btn btn-primary" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
             </div>
@@ -81,7 +81,7 @@
 
     <div class="clone hide">
         <div class="control-group input-group" style="margin-top:10px">
-        <input type="file" name="{{$input}}" class="form-control">
+        <input type="file" name="{{$input}}" value="{{ isset($row) ? $row->{$input} : '' }}" class="form-control">
           <div class="input-group-btn"> 
             <button class="btn btn-danger" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
           </div>

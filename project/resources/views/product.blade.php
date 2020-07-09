@@ -1,4 +1,4 @@
-@extends('master')
+{{-- @extends('master')
 @section('container')
 
 		<!-- BREADCRUMB -->
@@ -530,4 +530,4 @@
 		</div>-->
 		<!-- /Section -->
 
-@endsection
+@endsection --}}

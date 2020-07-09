@@ -13,7 +13,7 @@ class CategoriesController extends BackEndController
     }
 
     public function store(Store $request){
-        dd($request->all());
+        // dd($request->all());
         $this->model->create($request->all());
 
         return redirect('dashboard/categories');

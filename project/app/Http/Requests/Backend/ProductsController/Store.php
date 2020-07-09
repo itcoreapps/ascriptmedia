@@ -25,7 +25,11 @@ class Store extends FormRequest
     {
         return [
             'p_name' => ['required', 'string', 'max:191'],
-            // 'cat_id' => ['required'],
+            'p_price_egp' => ['required'],
+            'p_price_dollar' => ['required'],
+            'p_price_bitcoins' => ['required'],
+            'p_description' => ['required'],
+            'cat_id' => ['required'],
         ];
     }
 }

@@ -40,6 +40,13 @@
           </a>
         </li>
 
+        <li class="nav-item {{is_active('orders')}}">
+          <a class="nav-link" href="{{url('/dashboard/orders')}}">
+            <i class="material-icons">bubble_chart</i>
+            <p>Orders</p>
+          </a>
+        </li>
+
 
         <!-- your sidebar here -->
       </ul>
