@@ -111,7 +111,7 @@
 									</a>
 									<div class="cart-dropdown">
 										<div class="cart-list">
-											@foreach(\Cart::getContent() as $item)
+											@foreach($cart as $item)
 											<div class="product-widget">
 												<div class="product-img  ">
 													@if( $item->attributes->has('image') )
@@ -126,7 +126,7 @@ item</a></h3>
     
 													 <span class="bitPrice">bit coin {{$item->attributes->priceBitcoin}}</span>
 													 @endif
-												</div>
+											    </div>
 
 												<a class="delete  delCart"  href="cart/delete/{{$item->id}}" ><i class="fa fa-close"></i></a>
 											</div>
@@ -134,8 +134,8 @@ item</a></h3>
 											@endforeach
 										</div>
 										<div class="cart-summary">
-											<small>{{\Cart::session(1)->getContent()->count()}} Item(s) selected</small>
-											<h5>SUBTOTAL: ${{\Cart::getSubTotal()}}</h5>
+											<small>{{$cart->count()}} Item(s) selected</small>
+											<h5>SUBTOTAL: ${{$total}}</h5>
 										</div>
 										<div class="cart-btns">
 											<a href="cart">View Cart</a>

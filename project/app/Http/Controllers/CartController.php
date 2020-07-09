@@ -41,10 +41,12 @@ class CartController extends Controller
         ));
        
 
-        $cart = Cart::getContent();
-
-          $count=$cart->count();
-         return response()->json($count);
+        $cartContent = Cart::getContent();
+        $subtotal = Cart::getSubTotal();
+        $count=$cartContent->count();
+         $cart=['cartContent'=>$cartContent,'subtotal'=>$subtotal,'count'=>$count];
+         // $count=$cart->count();
+         return response()->json(json_encode($cart));
 
        
     
