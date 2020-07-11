@@ -60,10 +60,10 @@
 
               
               @php 
-              $images = DB::table('images')->where('p_id',$row->id)->get();
+              $images = DB::table('images')->where('p_id',$row->p_id)->get();
               @endphp
               <tr>
-                  <td>{{$row->id}}</td>
+                  <td>{{$row->p_id}}</td>
                   <td>{{$row->p_name}}</td>
                   <td>{{$row->p_price_egp}}</td>
                   <td>{{$row->p_price_dollar}}</td>
@@ -85,8 +85,17 @@
                   <td class="text-primary" class="td-actions">
 
                     <!-- To make edit and delete buttoms is shared-->
-                      @include('dashboard.shared.buttoms.edit')
-                      @include('dashboard.shared.buttoms.delete')
+                    <a href="{{'/dashboard/'.$routename.'/'.$row->p_id.'/edit'}}" rel="tooltip" title="" class="btn btn-white btn-link btn-sm" data-original-title="Edit">
+                      <i class="material-icons">edit</i>
+                    </a>
+
+                    <form action="{{route('dashboard/'.$routename.'.delete',['id' => $row->p_id])}}" method="POST">
+                      @csrf
+                      {{ method_field('delete')}}
+                      <button type="submit" rel="tooltip" title="" class="btn btn-white btn-link btn-sm" data-original-title="Remove">
+                          <i class="material-icons">close</i>
+                      </button>
+                    </form>
                                        
                   </td>
               </tr>

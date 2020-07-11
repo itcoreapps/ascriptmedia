@@ -40,9 +40,10 @@ Route::namespace('Backend')->prefix('dashboard')->group(function(){
     Route::delete('orders/delete/{id}','OrdersController@delete')->name('dashboard/orders.delete');
 });
 // --------------------------  Route For Dashboard -------------------------------//
-Route::get('login',function(){
-    // return view('login');
-});
+// Route::get('login',function(){
+//     // return view('login');
+// });
+// Route::get('register');
 Route::get('/','productController@index');
 Route::get('/{id}','productController@show');
 
@@ -61,7 +62,3 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

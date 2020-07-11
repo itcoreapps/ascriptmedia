@@ -17,7 +17,8 @@ class ProductsController extends BackEndController
     }
 
     protected function with(){
-        return['cat','image'];
+        // return['cat','image'];
+        return['cat'];
     }
 
     protected function append(){
@@ -31,10 +32,48 @@ class ProductsController extends BackEndController
         return $array;
     }
     
-    public function store(Store $request){
+    public function index(){
+        // $rows = Category::get();
+        $rows = Product::orderBy('p_id','desc')->paginate(5);
+
+        $pageTitle = strtoupper($this->getNameFromModel()).' CONTROLLER';   
+        $pageDes = 'Here you can add / edit / delete '.$this->getNameFromModel();
+        $routename = $this->plureModelName();
+        // dd($this->getNameFromModel()); 
+        return view('dashboard.'.$this->plureModelName().'.index', compact(
+            'rows',
+            'pageTitle',
+            'pageDes',
+            'routename'
+        ));
+    }
+
+    public function edit($id){
+        $row =  Product::findOrFail($id);
+        // dd($row);
+
+        $pageTitle = 'EDITE '.strtoupper($this->plureModelName());   
+        $pageDes = "Here you can edit ".$this->plureModelName(); 
+        $routename = $this->plureModelName();
+        $append = $this->append();
+
+        return view('dashboard.'.$routename.'.edit', compact(
+            'row',
+            'pageTitle',
+            'pageDes',
+            'routename'))->with($append);
+    }
+
+    public function store(Request $request){
 
         // dd($request->img_path);
         $item = Product::create($request->all());
+        // dd($item->p_id);
+
+        // dd($request->all());
+        // $row = Product::create($request->all());
+
+
         $images = array();
         if($files = $request->file('img_path')){
             foreach($files as $image){
@@ -43,7 +82,7 @@ class ProductsController extends BackEndController
                 $images[] = $name;
 
                 Image::create([
-                    'p_id' => $item->id,
+                    'p_id' => $item->p_id,
                     'img_path' => $name
                 ]);
             }
@@ -80,7 +119,20 @@ class ProductsController extends BackEndController
         return redirect('dashboard/products');
     }
 
-    public function deleteImage($id, Request $request){
+    public function delete($id){
+
+        // $images = Product::findOrFail($id)->image;
+        // foreach($images as $image){
+        //     dd($image->img_id);
+        // }
+        // dd( Product::findOrFail($id)->image);
+        $product = Product::findOrFail($id)->image()->delete();
+        $delete = Product::findOrFail($id)->delete();
+        // $image = Image::findOrFail($id)->delete();
+        return redirect('/dashboard/'.$this->plureModelName());
+        
+    }
+    public function deleteImage($id){
 
         // $img_id = $request->id;
         $row = Image::findOrFail($id)->delete();

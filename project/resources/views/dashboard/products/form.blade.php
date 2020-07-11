@@ -148,7 +148,7 @@
             <label class="bmd-label-floating">Category</label>
             <select name="{{ $input }}" class="form-control{{ $errors->has($input) ? ' is-invalid' : '' }}" >
                 @foreach ($cats as $cat)
-                <option value="{{ $cat->id }}" {{ isset($row) && $row[$input] == $cat->id ? 'selected' : ''}}>{{$cat->c_name}}</option>
+                <option value="{{ $cat->c_id }}" {{ isset($row) && $row[$input] == $cat->c_id ? 'selected' : ''}}>{{$cat->c_name}}</option>
                     
                 @endforeach
             </select>

@@ -35,23 +35,23 @@ class BackEndController extends Controller
         $this->model = $model;
     }
 
-    public function index(){
-        $rows = $this->model;
-        
-        $rows = $rows->orderBy('id','desc')->paginate(5);
+    // public function index(){
+    //     $rows = $this->model;
+       
+    //     // $rows = $rows->orderBy('id','desc')->paginate(5);
 
-        // make this to dynamic page
-        $pageTitle = strtoupper($this->getNameFromModel()).' CONTROLLER';   
-        $pageDes = 'Here you can add / edit / delete '.$this->getNameFromModel();
-        $routename = $this->plureModelName();
-        // dd($this->getNameFromModel()); 
-        return view('dashboard.'.$this->plureModelName().'.index', compact(
-            'rows',
-            'pageTitle',
-            'pageDes',
-            'routename'
-        ));
-    }
+    //     // make this to dynamic page
+    //     $pageTitle = strtoupper($this->getNameFromModel()).' CONTROLLER';   
+    //     $pageDes = 'Here you can add / edit / delete '.$this->getNameFromModel();
+    //     $routename = $this->plureModelName();
+    //     // dd($this->getNameFromModel()); 
+    //     return view('dashboard.'.$this->plureModelName().'.index', compact(
+    //         'rows',
+    //         'pageTitle',
+    //         'pageDes',
+    //         'routename'
+    //     ));
+    // }
 
     public function create(){
         $pageTitle = 'CREATE '.strtoupper($this->plureModelName());   
@@ -65,24 +65,24 @@ class BackEndController extends Controller
             'routename'))->with($append);
     }
 
-    public function edit($id){
-        $row =  $this->model->findOrFail($id);
+    // public function edit($id){
+    //     $row =  $this->model->findOrFail($id);
 
-        $pageTitle = 'EDITE '.strtoupper($this->plureModelName());   
-        $pageDes = "Here you can edit ".$this->plureModelName(); 
-        $routename = $this->plureModelName();
-        $append = $this->append();
+    //     $pageTitle = 'EDITE '.strtoupper($this->plureModelName());   
+    //     $pageDes = "Here you can edit ".$this->plureModelName(); 
+    //     $routename = $this->plureModelName();
+    //     $append = $this->append();
 
-        return view('dashboard.'.$routename.'.edit', compact(
-            'row',
-            'pageTitle',
-            'pageDes',
-            'routename'))->with($append);
-    }
+    //     return view('dashboard.'.$routename.'.edit', compact(
+    //         'row',
+    //         'pageTitle',
+    //         'pageDes',
+    //         'routename'))->with($append);
+    // }
 
-    public function delete($id){
-        $row = $this->model->findOrFail($id)->delete();
-        return redirect('/dashboard/'.$this->plureModelName());
+    // public function delete($id){
+    //     $row = $this->model->findOrFail($id)->delete();
+    //     return redirect('/dashboard/'.$this->plureModelName());
         
-    }
+    // }
 }
