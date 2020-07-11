@@ -54,7 +54,7 @@
                      
                   <input type="hidden" name="item_id" value="{{$item->id}}" class="form-control">
                    
-                     <input type="number" name="qty" value="{{$item->quantity}}" class="form-control">
+                     <input type="number" name="qty" value="{{$item->quantity}}" class="form-control" min="0">
                     </td>
                     <td ><b> $</b> {{$item->getPriceSum()}}   </td>
                     @if( $item->attributes->has('priceEgy') )

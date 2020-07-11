@@ -15,10 +15,34 @@ $(document).ready(function() {
           url: 'addToCart',
           data: ({product_id: link_data}),
           success: function(data) {
-             
-            //var count=data;
-            $("#qtyCt").text(data);
-            alert("your item has added to cart");
+            if(data !=null){
+              data=JSON.parse(data);
+              var cartContent=data.cartContent;
+               $("#qtyCt").text(data.count);
+               var string1="";
+              for(var i in cartContent){
+           cartContent[i].id;
+            
+            string1 +=' <div class="product-widget"><div class="product-img  ">'+
+           '<img src="./img/'+cartContent[i].attributes.image+'" alt="" class="cartImg"></div>'+
+                        '<div class="product-body">'+
+                          '<h3 class="product-name "><a href="#" class="cartName">product name: '+cartContent[i].name+' item</a></h3>'+
+                         '<h4 class="product-price"><span class="qty itemQ">'+cartContent[i].quantity +'x</span>'+
+                         '<span class="cartPrice">$'+cartContent[i].price+'</span></h4>'+
+                        '<span class="bitPrice">bit coin '+cartContent[i].attributes.priceBitcoin+'</span></div>'+
+
+                        '<a class="delete  delCart"  href="cart/delete/'+cartContent[i].id+'" ><i class="fa fa-close"></i></a></div>';
+            
+            $(".cart-list").html(string1);
+
+          
+            }
+            
+                    var string2=' <small>'+data.count+' Item(s) selected</small>'+
+                      '<h5>SUBTOTAL: $'+data.subtotal+'</h5>';
+                     $(".cart-summary").html(string2); 
+                       alert("your item has added to cart");
+          }
           }
        });   
     
