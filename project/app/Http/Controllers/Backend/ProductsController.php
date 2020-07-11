@@ -126,7 +126,7 @@ class ProductsController extends BackEndController
         //     dd($image->img_id);
         // }
         // dd( Product::findOrFail($id)->image);
-        $product = Product::findOrFail($id)->image()->delete();
+        $product = Product::findOrFail($id)->images()->delete();
         $delete = Product::findOrFail($id)->delete();
         // $image = Image::findOrFail($id)->delete();
         return redirect('/dashboard/'.$this->plureModelName());
