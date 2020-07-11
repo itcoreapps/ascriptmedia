@@ -15,7 +15,7 @@
 
       @slot('slot')
       <div class="card-body">
-        <form action="{{route('categories.update',$row->id)}}" method="POST">
+        <form action="{{route('categories.update',$row->c_id)}}" method="POST">
             {{ method_field('put')}}
             @include('dashboard.'.$routename.'.form')
             

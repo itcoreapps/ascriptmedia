@@ -14,11 +14,20 @@ class UsersController extends BackEndController
         parent::__construct($model);
     }
         
-    protected function filter($rows){
-        if(request()->has('name') && request()->get('name') != ''){
-            $rows = $rows->where('name', request()->get('name'));
-        }
-        return $rows;
+    public function index(){
+        // $rows = Category::get();
+        $rows = User::orderBy('id','desc')->paginate(5);
+
+        $pageTitle = strtoupper($this->getNameFromModel()).' CONTROLLER';   
+        $pageDes = 'Here you can add / edit / delete '.$this->getNameFromModel();
+        $routename = $this->plureModelName();
+        // dd($this->getNameFromModel()); 
+        return view('dashboard.'.$this->plureModelName().'.index', compact(
+            'rows',
+            'pageTitle',
+            'pageDes',
+            'routename'
+        ));
     }
 
     public function store(Store $request){

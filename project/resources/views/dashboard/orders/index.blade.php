@@ -71,7 +71,7 @@ $pageDec = 'Here Show All Orders';
               @endforeach
             </tbody>
           </table>   
-          {{ $rows->links() }} 
+          {{-- {{ $rows->links() }}  --}}
         @endslot
          
       @endcomponent
