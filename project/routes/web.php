@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,8 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 /////////// cart route//////////////////
-Route::post('addToCart','CartController@add' );
+Route::post('/addToCart','CartController@add');
 Route::get('cart','CartController@index' );
 Route::post('cart/update','CartController@update' );
 Route::get('cart/delete/{id}','CartController@removeItem' );
@@ -40,16 +40,17 @@ Route::namespace('Backend')->prefix('dashboard')->group(function(){
     Route::delete('orders/delete/{id}','OrdersController@delete')->name('dashboard/orders.delete');
 });
 // --------------------------  Route For Dashboard -------------------------------//
-// Route::get('login',function(){
-//     // return view('login');
-// });
-// Route::get('register');
-Route::get('/','productController@index');
-Route::get('/{id}','productController@show');
-
-Route::get('/products', function () {
-    return view('product');
+Route::get('login',function(){
+    // return view('login');
 });
+///////////////// tasks of show Products in index ///////////
+
+//Route::resource('product','productController');
+Route::get('/','productController@index');
+Route::get('/product/{id}','productController@show');
+Route::get('/productsCat/{id}', 'productController@productsCat');
+Route::get('/productsCatDel', 'productController@productsCatDel');
+///////////////////////////////////////
 
 Route::get('/payment', function () {
     return view('checkout');

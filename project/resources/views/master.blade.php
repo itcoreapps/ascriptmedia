@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		 <meta name="csrf-token" content="{{ csrf_token() }}" />
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 		<title>Electro - HTML Ecommerce Template</title>
@@ -37,7 +37,6 @@
 
     </head>
 	<body>
-
 		<!-- HEADER -->
 		<header>
 			<!-- TOP HEADER -->
@@ -50,7 +49,7 @@
 					</ul>
 					<ul class="header-links pull-right">
 						<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-						<li><a href="{{ url('/login')}} "><i class="fa fa-user-o"></i> My Account</a></li>
+						<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
 					</ul>
 				</div>
 			</div>
@@ -102,8 +101,8 @@
 								</div>
 								<!-- /Wishlist -->
 
-								<!-- Cart -->
-								<div class="dropdown">
+							<!-- Cart -->
+							<div class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Your Cart</span>
@@ -119,14 +118,13 @@
                                                      @endif
 												</div>
 												<div class="product-body">
-													<h3 class="product-name "><a href="#" class="cartName">product name: {{$item->name}}
-item</a></h3>
+													<h3 class="product-name "><a href="#" class="cartName">product name: {{$item->name}}item</a></h3>
 													<h4 class="product-price"><span class="qty itemQ">{{$item->quantity}}x</span><span class="cartPrice">${{$item->price}}</span></h4>
 													@if( $item->attributes->has('priceBitcoin') )
     
 													 <span class="bitPrice">bit coin {{$item->attributes->priceBitcoin}}</span>
 													 @endif
-											    </div>
+												</div>
 
 												<a class="delete  delCart"  href="cart/delete/{{$item->id}}" ><i class="fa fa-close"></i></a>
 											</div>
@@ -275,7 +273,7 @@ item</a></h3>
 								<h3 class="footer-title">Service</h3>
 								<ul class="footer-links">
 									<li><a href="#">My Account</a></li>
-									<li><a href="cart">View Cart</a></li>
+									<li><a href="#">View Cart</a></li>
 									<li><a href="#">Wishlist</a></li>
 									<li><a href="#">Track My Order</a></li>
 									<li><a href="#">Help</a></li>
@@ -319,6 +317,7 @@ item</a></h3>
 		<!-- /FOOTER -->
 
 		<!-- jQuery Plugins -->
+	
 		<script src="{{asset('js/jquery.min.js')}}"></script>
 		<script src="{{asset('js/bootstrap.min.js')}}"></script>
 		<script src="{{asset('js/slick.min.js')}}"></script>

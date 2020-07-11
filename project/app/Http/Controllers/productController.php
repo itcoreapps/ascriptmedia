@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\Product;
+use App\Models\image;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class productController extends Controller
@@ -13,16 +15,12 @@ class productController extends Controller
      */
     public function index()
     {
-               
-        $pro=Product::all();
-
-
-// foreach ($pro as $b) {
-//     echo $b->image[0]->img_path;
-// }
-        //dd($pro);
         
-return view('index')->with('products',$pro);
+       
+       $pro=Product::with('cat','images')->get();
+     $categories =Category::get();
+        return view('index')->with('prod',$pro)->with('categories',$categories);
+         //dd($pro);
       
     }
 
@@ -55,8 +53,9 @@ return view('index')->with('products',$pro);
      */
     public function show($id)
     {
-      //  dd("cjbdskcbdsc");
-        $pro=Product::find($id);
+        $pro=Product::with('cat','images')->find($id);
+        
+       //$pro=Image::with('product')->find($id);
         return view('product')->with('product',$pro);
     }
 
@@ -92,5 +91,33 @@ return view('index')->with('products',$pro);
     public function destroy($id)
     {
         //
+    }
+
+    ////////////// show Products of specific category /////////////
+    public function productsCat($id)
+    {
+   
+        $objects=array();
+       
+         $category=Category::with('products')->find($id);
+         foreach($category->products as $cat)
+         {
+             $pro=Image::with('product')->find($cat->p_id);
+             $objects[]=$pro;
+         }
+        
+          
+         $products= (object)$objects;
+       
+           return view('productsPage')->with('products',$products)->with('category',$category);
+      
+       
+    }
+///////////// show All Products without all checkbox of categories notChecked //////
+    public function productsCatDel()
+    {
+        $pro=Product::with('cat','images')->get();
+        
+         return view('productsPage2')->with('prod',$pro)->with('categories',Category::get());
     }
 }

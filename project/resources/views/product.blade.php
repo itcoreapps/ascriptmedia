@@ -1,4 +1,4 @@
-{{-- @extends('master')
+@extends('master')
 @section('container')
 
 		<!-- BREADCRUMB -->
@@ -33,21 +33,12 @@
 					<!-- Product main img -->
 					<div class="col-md-5 col-md-push-2">
 						<div id="product-main-img">
+						@foreach($product->images as $pro)
 							<div class="product-preview">
-								<img src="./img/{{$product->p_image}}" alt="">
+								<img src="{{ asset('/img/'.$pro->img_path)}}" alt="">
 							</div>
 
-							<div class="product-preview">
-								<img src="./img/{{$product->p_image}}" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="./img/{{$product->p_image}}" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="./img/{{$product->p_image}}" alt="">
-							</div>
+							@endforeach
 						</div>
 					</div>
 					<!-- /Product main img -->
@@ -55,21 +46,12 @@
 					<!-- Product thumb imgs -->
 					<div class="col-md-2  col-md-pull-5">
 						<div id="product-imgs">
+						@foreach($product->images as $pro)
 							<div class="product-preview">
-								<img src="./img/{{$product->p_image}}" alt="">
+								<img src="{{ asset('/img/'.$pro->img_path)}}" alt="">
 							</div>
-
-							<div class="product-preview">
-								<img src="./img/{{$product->p_image}}" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="./img/{{$product->p_image}}" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="./img/{{$product->p_image}}" alt="">
-							</div>
+							@endforeach
+					
 						</div>
 					</div>
 					<!-- /Product thumb imgs -->
@@ -115,15 +97,21 @@
 							</div>-->
 
 							<div class="add-to-cart">
-								<div class="qty-label">
+								<form class=" addTcart" role="form"  >
+                                                            @csrf
+                                <input type="hidden" name="p_id" value="{{$product->p_id}}">
+							<!-- 	<div class="qty-label"> -->
 									Qty
-									<div class="input-number">
-										<input type="number">
+									<!-- <div class="input-number">
+										<input type="number" name="qty">
 										<span class="qty-up">+</span>
 										<span class="qty-down">-</span>
-									</div>
-								</div>
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+									</div> -->
+									<input type="number" name="qty" min="0" class="form-control">
+								<!-- </div> -->
+								
+								 <button  type="submit" class="add-to-cart-btn addTcart" > <i class="fa fa-shopping-cart"></i> add to cart</button>
+							
 							</div>
 
 							<!--<ul class="product-btns">
@@ -530,4 +518,4 @@
 		</div>-->
 		<!-- /Section -->
 
-@endsection --}}
+@endsection
