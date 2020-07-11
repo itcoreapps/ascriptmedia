@@ -7,16 +7,21 @@ $(document).ready(function() {
 
         
     // use class selector instead of ID
-        $("form.addTcart").bind('submit', function(e) {
+
+   
+   
+
+
+        $(".addTcart").click(function(e) {
         e.preventDefault();
-         var p_id=$('input[name ="p_id"]').val();
-              var qty=$('input[name ="qty"]').val();
-              var _token=$('input[name ="_token"]').val();
+        var form = $(this).parents('form:first');
+
+         //
        
        $.ajax({
           type: "POST",
           url: '../addToCart',
-          data:{p_id:p_id,qty:qty,_token:_token},
+          data:form.serialize(),
           success: function(data) {
             if(data !=null){
               data=JSON.parse(data);
@@ -45,7 +50,7 @@ $(document).ready(function() {
                       '<h5>SUBTOTAL: $'+data.subtotal+'</h5>';
                      $(".cart-summary").html(string2); 
                     
-                    var suc ='     <div class="alert alert-success">'+cartContent[link_data].name+
+                    var suc ='     <div class="alert alert-success">'+
                     '  item has added to cart.</div>';
                      $("#sucsCart").append(suc);
                        //alert("your item has added to cart");

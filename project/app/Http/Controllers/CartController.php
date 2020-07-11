@@ -28,7 +28,7 @@ class CartController extends Controller
        }
        
         Cart::add(array(
-        'id' => $Product->id,
+        'id' => $Product->p_id,
         'name' => $Product->p_name,
         'price' => $Product->p_price_dollar,        
         'quantity' => $req->qty,        

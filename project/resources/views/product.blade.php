@@ -118,7 +118,7 @@
 
 								<form class=" addTcart" role="form"  >
                                                             @csrf
-                                <input type="hidden" name="p_id" value="{{$product->id}}">
+                                <input type="hidden" name="p_id" value="{{$product->p_id}}">
 								<div class="qty-label">
 									Qty
 									<div class="input-number">

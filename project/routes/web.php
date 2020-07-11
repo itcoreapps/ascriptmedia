@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/payment', function () {
+    return view('checkout');
+});
 /////////// cart route//////////////////
 Route::post('addToCart','CartController@add' );
 Route::get('cart','CartController@index' );
@@ -54,9 +57,7 @@ Route::get('/products', function () {
     return view('product');
 });
 
-Route::get('/payment', function () {
-    return view('checkout');
-});
+
 Route::get('/cart2', function () {
     return view('cart2');
 });

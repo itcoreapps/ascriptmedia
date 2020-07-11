@@ -93,16 +93,16 @@
 													<div class="add-to-cart">
 
 
-											<form class=" addTcart" role="form"  >
+											<form class="  " role="form"  >
                                                             @csrf
                   
                      
-                                         <input type="hidden" name="p_id" value="{{$product->id}}">
+                                         <input type="hidden" name="p_id" value="{{$product->p_id}}">
                    
                                           
 
                                            <input type="hidden" name="qty" value="1"  min="0" >
-                                           <button  type="submit" class="add-to-cart-btn " > <i class="fa fa-shopping-cart"></i> add to cart</button>
+                                           <button  type="submit" class="add-to-cart-btn addTcart "  > <i class="fa fa-shopping-cart" ></i> add to cart</button>
                   
                                              </form>
 														
@@ -384,7 +384,18 @@
 										</div>
 									</div>
 									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+										<form class="  " role="form"  >
+                                                            @csrf
+                  
+                     
+                                         <input type="hidden" name="p_id" value="{{$product->p_id}}">
+                   
+                                          
+
+                                           <input type="hidden" name="qty" value="1"  min="0" >
+                                           <button  type="submit" class="add-to-cart-btn addTcart "  > <i class="fa fa-shopping-cart" ></i> add to cart</button>
+                  
+                                             </form>
 									</div>
 								</div>
 							</div>
@@ -417,7 +428,18 @@
 										</div>
 									</div>
 									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+										<form class="  " role="form"  >
+                                                            @csrf
+                  
+                     
+                                         <input type="hidden" name="p_id" value="{{$product->p_id}}">
+                   
+                                          
+
+                                           <input type="hidden" name="qty" value="1"  min="0" >
+                                           <button  type="submit" class="add-to-cart-btn addTcart "  > <i class="fa fa-shopping-cart" ></i> add to cart</button>
+                  
+                                             </form>
 									</div>
 								</div>
 							</div>
@@ -443,7 +465,18 @@
 										</div>
 									</div>
 									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+										<form class="  " role="form"  >
+                                                            @csrf
+                  
+                     
+                                         <input type="hidden" name="p_id" value="{{$product->p_id}}">
+                   
+                                          
+
+                                           <input type="hidden" name="qty" value="1"  min="0" >
+                                           <button  type="submit" class="add-to-cart-btn addTcart "  > <i class="fa fa-shopping-cart" ></i> add to cart</button>
+                  
+                                             </form>
 									</div>
 								</div>
 							</div>
@@ -469,7 +502,18 @@
 										</div>
 									</div>
 									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+										<form class="  " role="form"  >
+                                                            @csrf
+                  
+                     
+                                         <input type="hidden" name="p_id" value="{{$product->p_id}}">
+                   
+                                          
+
+                                           <input type="hidden" name="qty" value="1"  min="0" >
+                                           <button  type="submit" class="add-to-cart-btn addTcart "  > <i class="fa fa-shopping-cart" ></i> add to cart</button>
+                  
+                                             </form>
 									</div>
 								</div>
 							</div>
@@ -495,7 +539,18 @@
 										</div>
 									</div>
 									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+										<form class="  " role="form"  >
+                                                            @csrf
+                  
+                     
+                                         <input type="hidden" name="p_id" value="{{$product->p_id}}">
+                   
+                                          
+
+                                           <input type="hidden" name="qty" value="1"  min="0" >
+                                           <button  type="submit" class="add-to-cart-btn addTcart "  > <i class="fa fa-shopping-cart" ></i> add to cart</button>
+                  
+                                             </form>
 									</div>
 								</div>
 							</div>
@@ -525,7 +580,18 @@
 										</div>
 									</div>
 									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+										<form class="  " role="form"  >
+                                                            @csrf
+                  
+                     
+                                         <input type="hidden" name="p_id" value="{{$product->p_id}}">
+                   
+                                          
+
+                                           <input type="hidden" name="qty" value="1"  min="0" >
+                                           <button  type="submit" class="add-to-cart-btn addTcart "  > <i class="fa fa-shopping-cart" ></i> add to cart</button>
+                  
+                                             </form>
 									</div>
 								</div>
 							</div>
@@ -557,7 +623,18 @@
 										</div>
 									</div>
 									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+										<form class="  " role="form"  >
+                                                            @csrf
+                  
+                     
+                                         <input type="hidden" name="p_id" value="{{$product->p_id}}">
+                   
+                                          
+
+                                           <input type="hidden" name="qty" value="1"  min="0" >
+                                           <button  type="submit" class="add-to-cart-btn addTcart "  > <i class="fa fa-shopping-cart" ></i> add to cart</button>
+                  
+                                             </form>
 									</div>
 								</div>
 							</div>
@@ -581,7 +658,18 @@
 										</div>
 									</div>
 									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+										<form class="  " role="form"  >
+                                                            @csrf
+                  
+                     
+                                         <input type="hidden" name="p_id" value="{{$product->p_id}}">
+                   
+                                          
+
+                                           <input type="hidden" name="qty" value="1"  min="0" >
+                                           <button  type="submit" class="add-to-cart-btn addTcart "  > <i class="fa fa-shopping-cart" ></i> add to cart</button>
+                  
+                                             </form>
 									</div>
 								</div>
 							</div>
@@ -607,7 +695,18 @@
 										</div>
 									</div>
 									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+										<form class="  " role="form"  >
+                                                            @csrf
+                  
+                     
+                                         <input type="hidden" name="p_id" value="{{$product->p_id}}">
+                   
+                                          
+
+                                           <input type="hidden" name="qty" value="1"  min="0" >
+                                           <button  type="submit" class="add-to-cart-btn addTcart "  > <i class="fa fa-shopping-cart" ></i> add to cart</button>
+                  
+                                             </form>
 									</div>
 								</div>
 							</div>
