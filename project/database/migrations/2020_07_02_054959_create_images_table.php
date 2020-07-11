@@ -18,7 +18,7 @@ class CreateImagesTable extends Migration
             $table->integer('img_id')->autoIncrement();
             $table->string('img_path');
             $table->integer('p_id');
-            $table->foreign('p_id')->references('p_id')->on('products')->onDelete('cascade');
+            $table->foreign('p_id')->references('p_id')->on('products');
             $table->timestamps();
         });
     }
