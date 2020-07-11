@@ -20,7 +20,7 @@ class CartController extends Controller
     ////////////////////////////add item to cart 
     public function add(Request $req){
       $imageCart="img";
-    	$Product = Product::find($req->product_id); 
+    	$Product = Product::find($req->p_id); 
       if($Product->image()->first() != null){       	
        $image=$Product->image()->first();
         //dd($image);
@@ -31,7 +31,7 @@ class CartController extends Controller
         'id' => $Product->id,
         'name' => $Product->p_name,
         'price' => $Product->p_price_dollar,        
-        'quantity' => 1,        
+        'quantity' => $req->qty,        
         'attributes' => array(
         'priceBitcoin' =>$Product->p_price_bitcoins ,
         'priceEgy' => $Product->p_price_egp,

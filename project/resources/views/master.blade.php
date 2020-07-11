@@ -14,7 +14,7 @@
 
  		<!-- Bootstrap -->
  		<link type="text/css" rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}"/>
-
+<link type="text/css" rel="stylesheet" href="{{asset('css/w3.css')}}"/>
  		<!-- Slick -->
  		<link type="text/css" rel="stylesheet" href="{{asset('css/slick.css')}}"/>
  		<link type="text/css" rel="stylesheet" href="{{asset('css/slick-theme.css')}}"/>

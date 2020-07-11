@@ -19,6 +19,9 @@ Route::get('cart','CartController@index' );
 Route::post('cart/update','CartController@update' );
 Route::get('cart/delete/{id}','CartController@removeItem' );
 Route::get('cart/destroy','CartController@destroy' );
+Route::get('/cart2', function () {
+    return view('cart2');
+});
 /////////////////////////////
 Route::namespace('Backend')->prefix('dashboard')->group(function(){
     // Route::namespace('Backend')->prefix('dashboard')->middleware('admin')->group(function(){
@@ -52,6 +55,9 @@ Route::get('/products', function () {
 
 Route::get('/payment', function () {
     return view('checkout');
+});
+Route::get('/cart2', function () {
+    return view('cart2');
 });
 
 // Route::get('/blank',function(){

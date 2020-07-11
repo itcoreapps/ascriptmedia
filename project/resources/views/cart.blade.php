@@ -5,106 +5,133 @@
  --> 
  <div class="section">
           <!-- container -->
-          <div class="container">
+          <div class="container"><script src="https://kit.fontawesome.com/a076d05399.js"></script>
             <!-- row -->
             <h2>YOUR CART</h2>
             <div class="row">       
  @if(count($cart))
 
  <div class="table-responsive-md  ">
-           <table   class=" table-hover table table-striped table-bordered" style="width:100%; max-height: 500px;" id="cartTable">
-              <thead class="thead-dark bg-info " style="background: #3e273b;color:#ffffff;">
+           <table   class=" table table-hover  " style="width:100%; max-height: 500px;" id="cartTable">
+              <thead >
                 <tr>
-                  <th class="text-center bg-dark" width="20%">Item Image</th>
-                  <th class="text-center bg-dark" width="10%">Item Name</th>
+                  <th  width="20%">Item Image</th>
+                  
             
-                  <th colspan="3" class="text-center bg-dark" width="20%">Price</th>
+                  <th   width="20%">Price</th>
                   
-                  <th class="text-center bg-dark" width="10%">Quantity</th>
-                  <th colspan="3" class="text-center bg-dark" width="25%"> Qty Price</th>
+                  <th   width="20%">Quantity</th>
+                  <th   width="20%"> Sum Price</th>
+                  <th   width="10%"> Action</th>
+                 
                   
-                  <th class="text-center bg-dark"width="7%">Update</th>
-                  <th class="text-center bg-dark"width="7%">Del</th>
                 </tr>
               </thead>
-              <tbody style="overflow: auto">
+              <br>
+              <tbody style="overflow: auto;  " class="w3-light-grey ">
+
                 @foreach($cart as $item)
                 <tr>
                    <td > 
                     @if( $item->attributes->has('image') )
                     <img src="./img/{{$item->attributes->image}}" class="rounded mx-auto d-block" alt="..." width="100px" height="100px">
-                          @endif          
+                          @endif <br>
+                           {{$item->name}}        
 
-</td> 
-                   <td >{{$item->name}}</td>
-<!--                    price all 
- -->               <td ><b> $ </b>{{$item->price}} </td>
-                   @if( $item->attributes->has('priceBitcoin') )
-                   <td ><b> BitCoin</b><br>{{number_format($item->attributes->priceBitcoin,7)}}</td>
-                   @endif
-                   @if( $item->attributes->has('priceEgy') )
-                   <td ><b> egp </b><br> {{number_format($item->attributes->priceEgy,2)}}</td> 
-                   @endif  
-                   <td >
- <form class="form-horizontal updateCart" role="form"  >
-                     
-
-@csrf
-
-                     
-                  <input type="hidden" name="item_id" value="{{$item->id}}" class="form-control">
+                  </td> 
                    
-                     <input type="number" name="qty" value="{{$item->quantity}}" class="form-control" min="0">
+<!--                    price all 
+ -->               <td  ><b> Dollar :</b><i class="fas fa-pound-sign"></i> {{$item->price}}<br>
+                    @if( $item->attributes->has('priceBitcoin') )
+                   <b> EGP :</b><i class="fas fa-pound-sign"></i> {{number_format($item->attributes->priceEgy,2)}}<br>
+                   @endif
+                   @if( $item->attributes->has('priceBitcoin') )
+                   <b> BitCoin :</b> <i class="fab fa-bitcoin"></i> {{number_format($item->attributes->priceBitcoin,7)}}<br>
+                   @endif
+
+                  </td>
+                  <td >             
+                   <form class="form-inline updateCart" role="form"  >
+                     
+
+                            @csrf
+  <div class="form-group">
+                     
+                    <input type="hidden" name="item_id" value="{{$item->id}}">
+                   
+                     <input type="number" name="qty" value="{{$item->quantity}}" class="form-control  " min="0" style="width: 90px;">
+                     <button  type="submit" class="btn btn-info " >OK</button>
+                   </div>
+                   </form>
                     </td>
-                    <td ><b> $</b> {{$item->getPriceSum()}}   </td>
+                    <td ><b>dollar : </b> <i class="fas fa-dollar-sign"></i> {{$item->getPriceSum()}}   <br>
                     @if( $item->attributes->has('priceEgy') )
-                    <td > <b>egp </b><br>{{number_format($item->attributes->priceEgy * $item->quantity,2)}} </td>
+                     <b>EGP : </b> <i class="fas fa-pound-sign"></i> {{number_format($item->attributes->priceEgy * $item->quantity,2)}} <br>
                     @endif
                     @if( $item->attributes->has('priceBitcoin') )
-                    <td > <b>BitCoin</b> <br>{{number_format($item->attributes->priceBitcoin * $item->quantity,7)}} </td>
-                    @endif
-
-                    <td > 
-                    <div class=" btn-group btn-group-sm"  role="group">  
-                      <input type="submit" class="btn btn-info " value="OK">
-                      
-                   </form>
-            </div></td><td>
-<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->              
-                   
-
-  <a class="btn btn-danger "  href="cart/delete/{{$item->id}}">X</a>
-                   
-                     
+                     <b>BitCoin :</b> <i class="fab fa-bitcoin"></i> {{number_format($item->attributes->priceBitcoin * $item->quantity,7)}} 
+                    @endif<br>
+                    </td>
+                     <td> <a class="btn btn-danger "  href="cart/delete/{{$item->id}}">Remove</a>
+                     </td>
                    
                    
-                       </td>
-                </tr>
+                </tr><tr class="w3-white w3-cart-4"><td></td><td></td><td></td><td></td></tr>
                 @endforeach 
             
               
               </tbody>
-               <tfoot class="text-center bg-dark">
+               <tfoot class=" bg-dark">
                  <hr>
                  <tr>
                    
-                     <td colspan="8" class="table-info">
-
+                     <td  class="table-info">
+                      <h4>Summery</h4><br>
                     <b> Items: </b>  {{$cart->count()}}<br>
-                     <b>SubTotal dollar :  </b>  $ {{\Cart::getSubTotal()}}<br>
+                     <b>SubTotal :</b><br> 
+                       <b>Dollar :</b>
+                       <i class="fas fa-dollar-sign"></i>  {{\Cart::getSubTotal()}}<br>
                       @if( $item->attributes->has('priceBitcoin') )
-                     <b>SubTotal Bitcoin :  </b>  {{number_format($item->attributes->priceBitcoin * $item->quantity * $cart->count(),7)}}<br>
+                     <b> Bitcoin :  </b> <i class="fab fa-bitcoin"></i> {{number_format($item->attributes->priceBitcoin * $item->quantity * $cart->count(),7)}}<br>
                       @endif
                      @if( $item->attributes->has('priceEgy') )
-                     <b>SubTotal egp :   </b> {{number_format($item->attributes->priceEgy * $item->quantity * $cart->count(),2) }}<br>
+                     <b> egp :   </b><i class="fas fa-pound-sign"></i> {{number_format($item->attributes->priceEgy * $item->quantity * $cart->count(),2) }}<br>
                       @endif
-                   </td><td colspan="3"> <a class="btn btn-danger "  href="cart/destroy" style="border-color: #000000;">delete all</a></td>
+                   </td> 
+                   
+                    
+                      <form action="{{url('shipping')}}" method="POST">
+                         @csrf 
+                         <td>
+                        <h4>Currency</h4><br>
+                          <input class="w3-radio" type="radio" name="currency" value="dollar" checked>
+                          <label>Dollar <i class="fas fa-dollar-sign"></i> </label><br>
+                          <input class="w3-radio" type="radio" name="currency" value="egp">
+                          <label>EgP <i class="fas fa-pound-sign"></i></label><br>
+                          <input class="w3-radio" type="radio" name="currency" value="bitcoin">
+                          <label>Bitcoin <i class="fab fa-bitcoin"></i></label><br>
+                         </td><td>
+                          <h4>Payment</h4><br>
+                          <input class="w3-radio" type="radio" name="PayType" value="visa" checked>
+                          <label><i class="fab fa-cc-visa" style="color: blue;
+                          font-size: 40px;"></i></label><br>
+                          <input class="w3-radio" type="radio" name="PayType" value="paypal">
+                          <label><i class="fab fa-cc-paypal" style="color: orange;
+                          font-size:40px;"></i></label><br>
+                        </td><td>
+                          <h4>Final Action</h4><br>
+
+                          <a class="btn btn-danger "  href="cart/destroy ">Delete Cart</a><br>
+                                     <br>
+                          <button  type="submit" class="btn btn-danger ">Checkout <i class='fas fa-money-bill-alt'></i></button></td>
+                      </form>
+                    
+                  
                  </tr>
               </tfoot>
           </table>
         </div>
-          <a href='{{url("shipping")}}' class="btn btn-danger " style="float:right;"> <i class="fa fa-arrow-circle-right">
-   Checkout </i></a> 
+         
           @endif
 
  

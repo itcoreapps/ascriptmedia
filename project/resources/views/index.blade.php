@@ -29,7 +29,9 @@
 					<div class="container">
 						<!-- row -->
 						<div class="row">
-		
+		<div  id="sucsCart"></div>
+               
+
 							<!-- section title -->
 							<div class="col-md-12">
 								<div class="section-title">
@@ -66,7 +68,7 @@
 													</div>
 													<div class="product-body">
 														<p class="product-category">Category</p>
-														<h3 class="product-name"><a href="/{{$product->id}}">{{$product->p_name}}</a></h3>
+														<h3 class="product-name"><a href="/{{$product->p_id}}">{{$product->p_name}}</a></h3>
 														<h4 class="product-price">  {{$product->p_price_egp}} </h4>
 														<h4 class="product-price">$ {{$product->p_price_dollar}} </h4>
 														<h4 class="product-price"><span class="fa fa-btc" aria-hidden="true"></span>{{$product->p_price_bitcoins}}</h4>
@@ -78,6 +80,10 @@
 															<i class="fa fa-star"></i>
 														</div>-->
 														<div class="product-btns">
+
+                                                         
+
+
 															<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
 															
 															<button class="quick-view" onclick="window.location.href='/{{$product->id}} '; "><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
@@ -85,8 +91,22 @@
 														</div>
 													</div>
 													<div class="add-to-cart">
+
+
+											<form class=" addTcart" role="form"  >
+                                                            @csrf
+                  
+                     
+                                         <input type="hidden" name="p_id" value="{{$product->id}}">
+                   
+                                          
+
+                                           <input type="hidden" name="qty" value="1"  min="0" >
+                                           <button  type="submit" class="add-to-cart-btn " > <i class="fa fa-shopping-cart"></i> add to cart</button>
+                  
+                                             </form>
 														
-														<button class="add-to-cart-btn addTcart" data-data='{{$product->id}}'><i class="fa fa-shopping-cart"></i> add to cart</button>
+														
 														
 													</div>
 												</div>

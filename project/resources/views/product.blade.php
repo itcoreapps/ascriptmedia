@@ -115,15 +115,21 @@
 							</div>-->
 
 							<div class="add-to-cart">
+
+								<form class=" addTcart" role="form"  >
+                                                            @csrf
+                                <input type="hidden" name="p_id" value="{{$product->id}}">
 								<div class="qty-label">
 									Qty
 									<div class="input-number">
-										<input type="number">
+										<input type="number"  name="qty">
 										<span class="qty-up">+</span>
 										<span class="qty-down">-</span>
 									</div>
 								</div>
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+								 <button  type="submit" class="add-to-cart-btn " > <i class="fa fa-shopping-cart"></i> add to cart</button>
+                  
+                                             </form>
 							</div>
 
 							<!--<ul class="product-btns">
