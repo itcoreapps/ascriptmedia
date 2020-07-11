@@ -6,12 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $primaryKey= "p_id";
-
+    protected $primaryKey ='p_id';
 
     protected $fillable = [
-        'p_name',
-        'p_price_egp',
+        'p_name','p_price_egp',
         'p_price_dollar',
         'p_price_bitcoins',
         'p_video',
@@ -26,7 +24,7 @@ class Product extends Model
         return $this->belongsTo(Category::class, 'cat_id');
     }
 
-    public function image(){
-        return $this->hasMany('App\Models\Image','p_id');
+    public function images(){
+        return $this->hasMany(Image::class,'p_id');
     }
 }

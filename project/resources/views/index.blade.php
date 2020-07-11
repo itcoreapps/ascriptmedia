@@ -1,5 +1,6 @@
 @extends('master')
 @section('container')
+@include('ourJs')
 
 		<!-- BREADCRUMB -->
 		<!--<div id="breadcrumb" class="section">
@@ -29,8 +30,7 @@
 					<div class="container">
 						<!-- row -->
 						<div class="row">
-		<div  id="sucsCart"></div>
-               
+				<div  id="sucsCart"></div>
 
 							<!-- section title -->
 							<div class="col-md-12">
@@ -56,20 +56,21 @@
 										<div id="tab1" class="tab-pane active">
 											<div class="products-slick" data-nav="#slick-nav-1">
 
-											@foreach($products as $product)
+											@foreach($prod as $product)
+											@foreach($product->images as $pro)
 												<!-- product -->
 												<div class="product">
 													<div class="product-img">
-														<img src="./img/image" alt="">
+														<img src="/img/{{$pro->img_path}}" alt="">
 														<!--<div class="product-label">
 															<span class="sale">-30%</span>
 															<span class="new">NEW</span>
 														</div>-->
 													</div>
 													<div class="product-body">
-														<p class="product-category">Category</p>
-														<h3 class="product-name"><a href="/{{$product->p_id}}">{{$product->p_name}}</a></h3>
-														<h4 class="product-price">  {{$product->p_price_egp}} </h4>
+														<p class="product-category">{{$product->cat->c_name}}</p>
+														<h3 class="product-name"><a href="/product/{{$product->p_id}}">{{$product->p_name}}</a></h3>
+														<h4 class="product-price">EGP {{$product->p_price_egp}} </h4>
 														<h4 class="product-price">$ {{$product->p_price_dollar}} </h4>
 														<h4 class="product-price"><span class="fa fa-btc" aria-hidden="true"></span>{{$product->p_price_bitcoins}}</h4>
 														<!--<div class="product-rating">
@@ -80,20 +81,15 @@
 															<i class="fa fa-star"></i>
 														</div>-->
 														<div class="product-btns">
-
-                                                         
-
-
 															<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
 															
-															<button class="quick-view" onclick="window.location.href='/{{$product->id}} '; "><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-															
+															<button class="quick-view" onclick="window.location.href='/product/{{$product->p_id}} '; " ><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+														
 														</div>
 													</div>
 													<div class="add-to-cart">
-
-
-											<form class="  " role="form"  >
+													
+													<form class="  " role="form"  >
                                                             @csrf
                   
                      
@@ -106,11 +102,11 @@
                   
                                              </form>
 														
-														
-														
+													
 													</div>
 												</div>
 												<!-- /product -->
+												@endforeach
 											@endforeach
 		
 											</div>
@@ -149,60 +145,23 @@
 						<div class="aside">
 							<h3 class="aside-title">Categories</h3>
 							<div class="checkbox-filter">
+								@if($categories !="")
+							@foreach($categories as $category)
+							
 
-								<div class="input-checkbox">
-									<input type="checkbox" id="category-1">
-									<label for="category-1">
+								<div class="input-checkbox" >
+									<input type="checkbox" id="category-{{ $category->c_id}}" value="{{ $category->c_id}}" class="checkSingle">
+									<label for="category-{{ $category->c_id}}">
 										<span></span>
-										CAT 1
+										{{ $category->c_name}}
 										<small>(120)</small>
 									</label>
 								</div>
+							
+							@endforeach
+							@endif
 
-								<div class="input-checkbox">
-									<input type="checkbox" id="category-2">
-									<label for="category-2">
-										<span></span>
-										CAT 2
-										<small>(740)</small>
-									</label>
-								</div>
-
-								<div class="input-checkbox">
-									<input type="checkbox" id="category-3">
-									<label for="category-3">
-										<span></span>
-										CAT 3
-										<small>(1450)</small>
-									</label>
-								</div>
-
-								<div class="input-checkbox">
-									<input type="checkbox" id="category-4">
-									<label for="category-4">
-										<span></span>
-										CAT 4
-										<small>(578)</small>
-									</label>
-								</div>
-
-								<div class="input-checkbox">
-									<input type="checkbox" id="category-5">
-									<label for="category-5">
-										<span></span>
-										CAT 5
-										<small>(120)</small>
-									</label>
-								</div>
-
-								<div class="input-checkbox">
-									<input type="checkbox" id="category-6">
-									<label for="category-6">
-										<span></span>
-										CAT 6
-										<small>(740)</small>
-									</label>
-								</div>
+							
 							</div>
 						</div>
 						<!-- /aside Widget -->
@@ -355,22 +314,30 @@
 						<!-- /store top filter -->
 
 						<!-- store products -->
-						<div class="row">
+					<div class="row">
+                   
+					   <div id="productData">
+						 
 							<!-- product -->
+							<div id="indexDel">
+							@foreach($prod as $product)
+								@foreach($product->images as $pro)
+								
 							<div class="col-md-4 col-xs-6">
 								<div class="product">
 									<div class="product-img">
-										<img src="./img/product01.png" alt="">
+										<img src="/img/{{$pro->img_path}}" alt="">
 										<div class="product-label">
 											<!--<span class="sale">-30%</span>
 											<span class="new">NEW</span>-->
 										</div>
 									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price"> $980.00 </h4>
-										<h4 class="product-price"><span class="fa fa-btc" aria-hidden="true"></span> 0.0002</h4>
+								    <div class="product-body">
+										<p class="product-category">{{$product->cat->c_name}}</p>
+										<h3 class="product-name"><a href="#">{{$product->p_name}}</a></h3>
+										<h4 class="product-price">EGP {{$product->p_price_egp}} </h4>
+										<h4 class="product-price"> ${{$product->p_price_dollar}} </h4>
+										<h4 class="product-price"><span class="fa fa-btc" aria-hidden="true"></span> {{$product->p_price_bitcoins}}</h4>
 										<!--<div class="product-rating">
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
@@ -380,7 +347,7 @@
 										</div>-->
 										<div class="product-btns">
 											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+											<button class="quick-view" onclick="window.location.href='/product/{{$product->p_id}} '; "><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
 										</div>
 									</div>
 									<div class="add-to-cart">
@@ -399,318 +366,24 @@
 									</div>
 								</div>
 							</div>
+							
 							<!-- /product -->
-
-							<!-- product -->
-							<div class="col-md-4 col-xs-6">
-								<div class="product">
-									<div class="product-img">
-										<img src="./img/product02.png" alt="">
-										<div class="product-label">
-											<!--<span class="new">NEW</span>-->
-										</div>
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price"> $980.00 </h4>
-										<h4 class="product-price"><span class="fa fa-btc" aria-hidden="true"></span> 0.0002</h4>
-										<!--<div class="product-rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star-o"></i>
-										</div>-->
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-										</div>
-									</div>
-									<div class="add-to-cart">
-										<form class="  " role="form"  >
-                                                            @csrf
-                  
-                     
-                                         <input type="hidden" name="p_id" value="{{$product->p_id}}">
-                   
-                                          
-
-                                           <input type="hidden" name="qty" value="1"  min="0" >
-                                           <button  type="submit" class="add-to-cart-btn addTcart "  > <i class="fa fa-shopping-cart" ></i> add to cart</button>
-                  
-                                             </form>
-									</div>
-								</div>
-							</div>
-							<!-- /product -->
-
-							<div class="clearfix visible-sm visible-xs"></div>
-
-							<!-- product -->
-							<div class="col-md-4 col-xs-6">
-								<div class="product">
-									<div class="product-img">
-										<img src="./img/product03.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price"> $980.00 </h4>
-										<h4 class="product-price"><span class="fa fa-btc" aria-hidden="true"></span> 0.0002</h4>
-										
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-										</div>
-									</div>
-									<div class="add-to-cart">
-										<form class="  " role="form"  >
-                                                            @csrf
-                  
-                     
-                                         <input type="hidden" name="p_id" value="{{$product->p_id}}">
-                   
-                                          
-
-                                           <input type="hidden" name="qty" value="1"  min="0" >
-                                           <button  type="submit" class="add-to-cart-btn addTcart "  > <i class="fa fa-shopping-cart" ></i> add to cart</button>
-                  
-                                             </form>
-									</div>
-								</div>
-							</div>
-							<!-- /product -->
-
-							<div class="clearfix visible-lg visible-md"></div>
-
-							<!-- product -->
-							<div class="col-md-4 col-xs-6">
-								<div class="product">
-									<div class="product-img">
-										<img src="./img/product04.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price"> $980.00 </h4>
-										<h4 class="product-price"><span class="fa fa-btc" aria-hidden="true"></span> 0.0002</h4>
-									
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-										</div>
-									</div>
-									<div class="add-to-cart">
-										<form class="  " role="form"  >
-                                                            @csrf
-                  
-                     
-                                         <input type="hidden" name="p_id" value="{{$product->p_id}}">
-                   
-                                          
-
-                                           <input type="hidden" name="qty" value="1"  min="0" >
-                                           <button  type="submit" class="add-to-cart-btn addTcart "  > <i class="fa fa-shopping-cart" ></i> add to cart</button>
-                  
-                                             </form>
-									</div>
-								</div>
-							</div>
-							<!-- /product -->
-
-							<div class="clearfix visible-sm visible-xs"></div>
-
-							<!-- product -->
-							<div class="col-md-4 col-xs-6">
-								<div class="product">
-									<div class="product-img">
-										<img src="./img/product05.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price"> $980.00 </h4>
-										<h4 class="product-price"><span class="fa fa-btc" aria-hidden="true"></span> 0.0002</h4>
-										
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-										</div>
-									</div>
-									<div class="add-to-cart">
-										<form class="  " role="form"  >
-                                                            @csrf
-                  
-                     
-                                         <input type="hidden" name="p_id" value="{{$product->p_id}}">
-                   
-                                          
-
-                                           <input type="hidden" name="qty" value="1"  min="0" >
-                                           <button  type="submit" class="add-to-cart-btn addTcart "  > <i class="fa fa-shopping-cart" ></i> add to cart</button>
-                  
-                                             </form>
-									</div>
-								</div>
-							</div>
-							<!-- /product -->
-
-							<!-- product -->
-							<div class="col-md-4 col-xs-6">
-								<div class="product">
-									<div class="product-img">
-										<img src="./img/product06.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price"> $980.00 </h4>
-										<h4 class="product-price"><span class="fa fa-btc" aria-hidden="true"></span> 0.0002</h4>
-										<!--<div class="product-rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star-o"></i>
-										</div>-->
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-										</div>
-									</div>
-									<div class="add-to-cart">
-										<form class="  " role="form"  >
-                                                            @csrf
-                  
-                     
-                                         <input type="hidden" name="p_id" value="{{$product->p_id}}">
-                   
-                                          
-
-                                           <input type="hidden" name="qty" value="1"  min="0" >
-                                           <button  type="submit" class="add-to-cart-btn addTcart "  > <i class="fa fa-shopping-cart" ></i> add to cart</button>
-                  
-                                             </form>
-									</div>
-								</div>
-							</div>
-							<!-- /product -->
-
+							@endforeach
+							@endforeach
 							<div class="clearfix visible-lg visible-md visible-sm visible-xs"></div>
+						</div>
+						</div>
+					</div>	
 
-							<!-- product -->
-							<div class="col-md-4 col-xs-6">
-								<div class="product">
-									<div class="product-img">
-										<img src="./img/product07.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price"> $980.00 </h4>
-										<h4 class="product-price"><span class="fa fa-btc" aria-hidden="true"></span> 0.0002</h4>
-										<!--<div class="product-rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>-->
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-										</div>
-									</div>
-									<div class="add-to-cart">
-										<form class="  " role="form"  >
-                                                            @csrf
-                  
-                     
-                                         <input type="hidden" name="p_id" value="{{$product->p_id}}">
-                   
-                                          
 
-                                           <input type="hidden" name="qty" value="1"  min="0" >
-                                           <button  type="submit" class="add-to-cart-btn addTcart "  > <i class="fa fa-shopping-cart" ></i> add to cart</button>
-                  
-                                             </form>
-									</div>
-								</div>
-							</div>
-							<!-- /product -->
+						
 
-							<!-- product -->
-							<div class="col-md-4 col-xs-6">
-								<div class="product">
-									<div class="product-img">
-										<img src="./img/product08.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price"> $980.00 </h4>
-										<h4 class="product-price"><span class="fa fa-btc" aria-hidden="true"></span> 0.0002</h4>
-										
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-										</div>
-									</div>
-									<div class="add-to-cart">
-										<form class="  " role="form"  >
-                                                            @csrf
-                  
-                     
-                                         <input type="hidden" name="p_id" value="{{$product->p_id}}">
-                   
-                                          
+							
 
-                                           <input type="hidden" name="qty" value="1"  min="0" >
-                                           <button  type="submit" class="add-to-cart-btn addTcart "  > <i class="fa fa-shopping-cart" ></i> add to cart</button>
-                  
-                                             </form>
-									</div>
-								</div>
-							</div>
-							<!-- /product -->
+						
 
-							<div class="clearfix visible-sm visible-xs"></div>
-
-							<!-- product -->
-							<div class="col-md-4 col-xs-6">
-								<div class="product">
-									<div class="product-img">
-										<img src="./img/product09.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price"> $980.00 </h4>
-										<h4 class="product-price"><span class="fa fa-btc" aria-hidden="true"></span> 0.0002</h4>
-										
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-										</div>
-									</div>
-									<div class="add-to-cart">
-										<form class="  " role="form"  >
-                                                            @csrf
-                  
-                     
-                                         <input type="hidden" name="p_id" value="{{$product->p_id}}">
-                   
-                                          
-
-                                           <input type="hidden" name="qty" value="1"  min="0" >
-                                           <button  type="submit" class="add-to-cart-btn addTcart "  > <i class="fa fa-shopping-cart" ></i> add to cart</button>
-                  
-                                             </form>
-									</div>
-								</div>
-							</div>
-							<!-- /product -->
+						
+							
 						</div>
 						<!-- /store products -->
 
