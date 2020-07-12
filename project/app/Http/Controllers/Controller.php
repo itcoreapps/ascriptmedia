@@ -19,4 +19,21 @@ class Controller extends BaseController
        
         // View::share('cart', $cart);
     }
+    public function getTotalBCP(){
+     	 $cartContent = \Cart::getContent();
+     	 foreach ($cartContent as $item ) {
+     	 	$totalpriceBitcoin+=$item->attributes->priceBitcoin*$item->quantity;
+     	 }
+     	 return $totalpriceBitcoin;
+
+    }
+    public function getTotalEgp(){
+    	$cartContent = \Cart::getContent();
+    	 foreach ($cartContent as $item ) {
+
+            $totalpriceEgp+=$item->attributes->priceEgy*$item->quantity;
+     	 }
+     	 return  $totalpriceEgp;
+    	
+    }
 }

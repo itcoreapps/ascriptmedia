@@ -42,7 +42,7 @@
             </div>
             <div class="col-sm-6 col-xs-12 col-md-3 "> 
             <h4>Quantity</h4>           
-              <form class="form-inline updateCart" role="form"  >
+              <form class="form-inline  " action="{{url('/cart/update')}}" role="form" method="POST" >
                                                @csrf
                   
                      
@@ -71,7 +71,7 @@
               </div>     
            @endforeach 
            
-           <div class="well col-sm-12 " >
+           <div class="well col-sm-12 bg-info " >
             <div class="container-fluid">
             <div class="row "> 
         <div class="col-sm-6 col-xs-12 col-md-3 "> 
@@ -80,12 +80,16 @@
             <b>SubTotal :</b><br> 
             <b>Dollar :</b>
             <i class="fa fa-usd"></i>  {{\Cart::getSubTotal()}}<br>
-            @if( $item->attributes->has('priceBitcoin') )
-            <b> Bitcoin :  </b> <i class="fa fa-btc"></i> {{number_format($item->attributes->priceBitcoin * $item->quantity * $cart->count(),7)}}<br>
-            @endif
-            @if( $item->attributes->has('priceEgy') )
-            <b> egp :   </b><i class="fa fa-gbp"></i> {{number_format($item->attributes->priceEgy * $item->quantity * $cart->count(),2) }}<br>
-            @endif
+            
+          
+            <b> Bitcoin :  </b> <i class="fa fa-btc"></i>
+
+            {{number_format( $totalpriceBitcoin,7)}}<br>
+          
+           
+            <b> egp :   </b><i class="fa fa-gbp"></i> {{number_format($totalpriceEgp,2) }}<br>
+           
+         
         </div> 
                          
           >

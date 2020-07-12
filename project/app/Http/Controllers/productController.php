@@ -18,9 +18,9 @@ class productController extends Controller
         
        
        $pro=Product::with('cat','images')->get();
-     $categories =Category::get();
+       $categories =Category::get();
         return view('index')->with('prod',$pro)->with('categories',$categories);
-         //dd($pro);
+         //dd($categories);
       
     }
 

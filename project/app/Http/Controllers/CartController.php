@@ -64,7 +64,7 @@ class CartController extends Controller
         )));
         $cart = Cart::getContent();
     	
-        return response()->json(['your item updated to cart']); 
+       return back();  
     }
     ////***** delete item from cart ************
     public function removeItem($id){

@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration
             $table->integer('o_id')->autoIncrement();
             $table->integer('u_id');
             $table->float('total_cost');
+            $table->string('bank_transaction_id')->nullable();
             $table->tinyInteger('payment_type');
             $table->timestamp('o_date');
             $table->timestamps();

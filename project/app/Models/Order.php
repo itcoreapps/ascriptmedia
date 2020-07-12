@@ -11,6 +11,7 @@ class Order extends Model
         'total_cost',
         'payment_type',
         'o_date',
+        'bank_transaction_id',
         
     ];
 

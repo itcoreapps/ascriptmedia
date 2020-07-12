@@ -26,12 +26,20 @@ class ComposerServiceProvider extends ServiceProvider
     {
         //
          View::composer('*', function ($view) {
-        $cart = Cart::getContent();   
-                        
+            $totalpriceBitcoin=null;
+            $totalpriceEgp=null;
+        $cart = Cart::getContent(); 
+        foreach($cart as $item){
+            $totalpriceBitcoin+=$item->attributes->priceBitcoin*$item->quantity;
+            $totalpriceEgp+=$item->attributes->priceEgy*$item->quantity;
+        }
+             
                $total = Cart::getSubTotal();
                
             View::share('cart',$cart);
             View::share('total',$total);
+            View::share('totalpriceBitcoin',$totalpriceBitcoin);
+            View::share('totalpriceEgp',$totalpriceEgp);
         });
         
          

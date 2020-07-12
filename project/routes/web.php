@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 /////////// cart route//////////////////
+Route::post('/makeOrder','PaymentController@makeorder');
+
 Route::post('/addToCart','CartController@add');
 Route::get('cart','CartController@index' );
 Route::post('cart/update','CartController@update' );
@@ -21,7 +23,8 @@ Route::get('cart/delete/{id}','CartController@removeItem' );
 Route::get('cart/destroy','CartController@destroy' );
 
 Route::get('/checkout','PaymentController@index');
-Route::post('/makeOrder','PaymentController@makeOrder');
+Route::get('/shipping/{currency}',function () {
+    return "this route for get id payment";});
 
 /////////////////////////////
 Route::namespace('Backend')->prefix('dashboard')->group(function(){
@@ -56,9 +59,9 @@ Route::get('/productsCat/{id}', 'productController@productsCat');
 Route::get('/productsCatDel', 'productController@productsCatDel');
 ///////////////////////////////////////
 
-Route::get('/payment', function () {
-    return view('checkout');
-});
+// Route::get('/payment', function () {
+//     return view('payment');
+// });
 
 // Route::get('/blank',function(){
 //     return view('blank');

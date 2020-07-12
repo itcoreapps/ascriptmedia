@@ -17,38 +17,69 @@ class PaymentController extends Controller
      if(Auth::check())
      return view('checkout');
      else
-     	return view('login');
+      return view('checkout');
+     //return view('login');
 
     }
+public function makeorder(Request $req ){
 
-    public function makeOrder(){
-    	 $validatedData = $request->validate([
+	 $validatedData = request()->validate([
         'currency' => 'required',
-        'first-name' => ['required', 'string', 'max:255'],
-        'last-name' => ['required', 'string', 'max:255'],
-        'email' => ['required', 'string', 'email', 'max:255'],
-        'address' => ['required', 'string','max:255'],
-        'city' => ['required', 'string','max:255'],
-        'country' => ['required', 'string','max:255'],
-        'zip-code' => ['required', 'string','max:255'],
-        'tel' => ['required', 'string','max:255'],
-        'orderNote' =>[ 'string', 'max:255'],
-        'payment' => 'required',
-        
+        'firstName' => 'required|string|max:255',
+        'lastName' => 'required|string|max:255',
+        'email' => 'required| string|email|max:255',
+        'address' => 'required|string|max:255',
+        'city' => 'required|string|max:255',
+        'country' => 'required|string|max:255',
+        'zipCode' => 'required|numeric',
+        'tel' => 'required|integer|min:11',
+        'password' => 'nullable|string| min:8',
+                
         ]);
 
+       $Total=Cart::getSubTotal();
+        $pay=1;
+	 if($req->currency=="Dollar"){
+	 	 $Total = Cart::getSubTotal();
+         $pay=1;
+	 }
+	 elseif ($req->currency=="EGP") {
+	 	$Total=getTotalEgp();
+	 	$pay=2;
+	 }
+	 elseif ($req->currency=="Bitcoin") {
+	 	$Total=getTotalBCP();
+	 	$pay=3;
+	 }
+	 
+    	  $user = new User;
 
+        
+        $user->name= $req->firstName." ".$req->lastName;
+        
+        $user->email = $req->email;
+        $user->address = $req->address."-".$req->city."-".$req->country;
+        $user->phone = $req->tel;      
+        $user->password =$req->password;
+        $user->userType =2;
+        $user->save();
+        $order=new Order;
+	    $order->u_id =$user->id;
+        $order->total_cost = $Total;
+        $order->bank_transaction_id ="";
+        $order->payment_type =$pay ;
+        $order->save();
+     //dd($order->o_id);
+        return redirect("/shipping/".$req->currency);
 
-
-
-       $currency = $req->currency;
-       if($currency=="bitcoin"){
-
-       }
-       else{
-       $url = "https://test.oppwa.com/v1/checkouts";
-	   $data = "entityId=8a8294174b7ecb28014b9699220015ca" .
-                "&amount=92.00" .
+}
+    public function makepay(){
+    
+        $total=Cart::getSubTotal();
+      
+        $url = "https://test.oppwa.com/v1/checkouts";
+	    $data = "entityId=8a8294174b7ecb28014b9699220015ca" .
+                "&amount=".$total.
                 "&currency=EUR" .
                 "&paymentType=DB";
 
@@ -68,7 +99,7 @@ class PaymentController extends Controller
 	   return $responseData;
 
 
-       }
+       
 
     }
 }
