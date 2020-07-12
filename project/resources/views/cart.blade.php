@@ -24,7 +24,7 @@
                <a class="btn btn-danger left  "  href="cart/delete/{{$item->id}}" style="float: left;">X</a>
                <br>
              @if( $item->attributes->has('image') )
-               <img src="./img/{{$item->attributes->image}}" class="rounded mx-auto d-block" alt="..." max-width="100px" max-height="100px">
+               <img src="./img/{{$item->attributes->image}}" class="rounded  d-block" alt="..." max-width="100px"  max-height="100px" height="100" width="100">
              @endif <br>
                     {{$item->name}}
 
@@ -88,26 +88,16 @@
             @endif
         </div> 
                          
-          <div class="col-sm-6 col-xs-12 col-md-3"> 
-            <form action="{{url('shipping')}}" method="POST">
-                @csrf 
-              <h3>Currency</h3><br>
-                <input class="w3-radio" type="radio" name="currency" value="dollar" checked>
-                <label>Dollar <i class="fa fa-usd"></i> </label><br>
-                <input class="w3-radio" type="radio" name="currency" value="egp">
-                <label>EgP <i class="fa fa-gbp"></i></label><br>
-                <input class="w3-radio" type="radio" name="currency" value="bitcoin">
-                <label>Bitcoin <i class="fa fa-btc"></i></label><br>
-          </div>
+          >
        
           <div class="col-sm-6 col-xs-12 col-md-3"> 
             <h3>Final Action</h3><br>
                                      <br>
-            <button  type="submit" class="btn btn-info " style="margin:5px">Checkout <i class='fas fa-money-bill-alt'></i></button>
+            <a  href="{{url('checkout')}}" class="btn btn-info " style="margin:5px">Checkout <i class='fas fa-money-bill-alt'></i></a>
                         <a class="btn btn-danger "  href="cart/destroy ">Delete Cart</a><br>
 
           </div>
-            </form>
+           
       </div>
    
          </div>

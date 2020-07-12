@@ -216,6 +216,7 @@
 							<div class="section-title">
 								<h3 class="title">Billing address</h3>
 							</div>
+							<form   method="post" action="{{url('/makeOrder')}}">
 							<div class="form-group">
 								<input class="input" type="text" name="first-name" placeholder="First Name">
 							</div>
@@ -240,67 +241,9 @@
 							<div class="form-group">
 								<input class="input" type="tel" name="tel" placeholder="Telephone">
 							</div>
-							<div class="form-group">
-								<div class="input-checkbox">
-									<input type="checkbox" id="create-account">
-									<label for="create-account">
-										<span></span>
-										Create Account?
-									</label>
-									<div class="caption">
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
-										<input class="input" type="password" name="password" placeholder="Enter Your Password">
-									</div>
-								</div>
-							</div>
+							
 						</div>
-						<!-- /Billing Details -->
-
-						<!-- Shiping Details -->
-						<!--<div class="shiping-details">
-							<div class="section-title">
-								<h3 class="title">Shiping address</h3>
-							</div>
-							<div class="input-checkbox">
-								<input type="checkbox" id="shiping-address">
-								<label for="shiping-address">
-									<span></span>
-									Ship to a diffrent address?
-								</label>
-								<div class="caption">
-									<div class="form-group">
-										<input class="input" type="text" name="first-name" placeholder="First Name">
-									</div>
-									<div class="form-group">
-										<input class="input" type="text" name="last-name" placeholder="Last Name">
-									</div>
-									<div class="form-group">
-										<input class="input" type="email" name="email" placeholder="Email">
-									</div>
-									<div class="form-group">
-										<input class="input" type="text" name="address" placeholder="Address">
-									</div>
-									<div class="form-group">
-										<input class="input" type="text" name="city" placeholder="City">
-									</div>
-									<div class="form-group">
-										<input class="input" type="text" name="country" placeholder="Country">
-									</div>
-									<div class="form-group">
-										<input class="input" type="text" name="zip-code" placeholder="ZIP Code">
-									</div>
-									<div class="form-group">
-										<input class="input" type="tel" name="tel" placeholder="Telephone">
-									</div>
-								</div>
-							</div>
-						</div>-->
-						<!-- /Shiping Details -->
-
-						<!-- Order notes -->
-						<div class="order-notes">
-							<textarea class="input" placeholder="Order Notes"></textarea>
-						</div>
+					
 						<!-- /Order notes -->
 					</div>
 
@@ -314,25 +257,49 @@
 								<div><strong>PRODUCT</strong></div>
 								<div><strong>TOTAL</strong></div>
 							</div>
+							@foreach($cart as $item)
 							<div class="order-products">
 								<div class="order-col">
-									<div>1x Product Name Goes Here</div>
-									<div>$980.00 <span>(0.001 BTC)</span></div>
+									<div>{{$item->quantity}}x {{$item->name}}</div>
+									<div>${{$item->price}} <span>({{$item->attributes->priceBitcoin}} BTC)</span></div>
 								</div>
-								<div class="order-col">
-									<div>2x Product Name Goes Here</div>
-									<div>$980.00 <span>(0.001 BTC)</span></div>
-								</div>
+								
 							</div>
-
+                            @endforeach
 							<div class="order-col">
 								<div><strong>TOTAL</strong></div>
-								<div><strong class="order-total">$2940.00 </strong> <h6>(0.002 BTC)</h6> </div>
+								<div><strong class="order-total">${{$total}} </strong> <h6>({{number_format($item->attributes->priceBitcoin * $item->quantity * $cart->count(),7)}} BTC)</h6> </div>
+							</div>
+						</div>
+<!-- 						///// currency type
+ -->						 <div class="payment-method">
+							<div class="input-radio">
+								<input type="radio" name="currency" id="payment-1" value="Dollar" >
+								<label for="payment-1">
+									<span></span>
+									Dollar
+								</label>
+								
+							</div>
+							<div class="input-radio">
+								<input type="radio" name="currency" id="payment-2" value="EGP" >
+								<label for="payment-2">
+									<span></span>
+									EGP
+								</label>
+								
+							</div>
+							<div class="input-radio">
+								<input type="radio" name="currency" id="payment-3" value="Bitcoin">
+								<label for="payment-3">
+									<span></span>
+									Bitcoin 
+								</label>
 							</div>
 						</div>
 						<div class="payment-method">
 							<div class="input-radio">
-								<input type="radio" name="payment" id="payment-1">
+								<input type="radio" name="payment" id="payment-1" value="visa">
 								<label for="payment-1">
 									<span></span>
 									Visa Payment
@@ -342,7 +309,7 @@
 								</div>
 							</div>
 							<div class="input-radio">
-								<input type="radio" name="payment" id="payment-2">
+								<input type="radio" name="payment" id="payment-2" value="paypal">
 								<label for="payment-2">
 									<span></span>
 									Paypal System
@@ -352,7 +319,7 @@
 								</div>
 							</div>
 							<div class="input-radio">
-								<input type="radio" name="payment" id="payment-3">
+								<input type="radio" name="payment" id="payment-3" value="bitcoinPay">
 								<label for="payment-3">
 									<span></span>
 									Bitcoin Payment
@@ -369,7 +336,8 @@
 								I've read and accept the <a href="#">terms & conditions</a>
 							</label>
 						</div>
-						<a href="#" class="primary-btn order-submit">Place order</a>
+						<input type="submit" class="primary-btn order-submit" value="Place order">
+						</form>
 					</div>
 					<!-- /Order Details -->
 				</div>

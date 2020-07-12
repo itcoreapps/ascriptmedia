@@ -21,8 +21,8 @@ class CartController extends Controller
     public function add(Request $req){
       $imageCart="img";
     	$Product = Product::find($req->p_id); 
-      if($Product->image()->first() != null){       	
-       $image=$Product->image()->first();
+      if($Product->images()->first() != null){       	
+       $image=$Product->images()->first();
         //dd($image);
         $imageCart=$image->img_path;
        }

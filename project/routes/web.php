@@ -19,6 +19,10 @@ Route::get('cart','CartController@index' );
 Route::post('cart/update','CartController@update' );
 Route::get('cart/delete/{id}','CartController@removeItem' );
 Route::get('cart/destroy','CartController@destroy' );
+
+Route::get('/checkout','PaymentController@index');
+Route::post('/makeOrder','PaymentController@makeOrder');
+
 /////////////////////////////
 Route::namespace('Backend')->prefix('dashboard')->group(function(){
     // Route::namespace('Backend')->prefix('dashboard')->middleware('admin')->group(function(){
