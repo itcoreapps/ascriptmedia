@@ -45,9 +45,9 @@
                   <td class="text-primary" class="td-actions">
 
                     <!-- To make edit and delete buttoms is shared-->
-                    <a href="{{'/dashboard/'.$routename.'/'.$row->c_id.'/edit'}}" rel="tooltip" title="" class="btn btn-white btn-link btn-sm" data-original-title="Edit">
-                      <i class="material-icons">edit</i>
-                  </a>
+                      <a href="{{'/dashboard/'.$routename.'/'.$row->c_id.'/edit'}}" rel="tooltip" title="" class="btn btn-white btn-link btn-sm" data-original-title="Edit">
+                        <i class="material-icons">edit</i>
+                      </a>
 
                       <form action="{{route('dashboard/'.$routename.'.delete',['id' => $row->c_id])}}" method="POST">
                         @csrf
@@ -55,7 +55,7 @@
                         <button type="submit" rel="tooltip" title="" class="btn btn-white btn-link btn-sm" data-original-title="Remove">
                             <i class="material-icons">close</i>
                         </button>
-                    </form>
+                      </form>
                                        
                   </td>
               </tr>
