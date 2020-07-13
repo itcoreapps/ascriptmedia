@@ -26,12 +26,14 @@ class CartController extends Controller
         //dd($image);
         $imageCart=$image->img_path;
        }
-       
+       if($req->qty >= 2){
+        Cart::remove($req->p_id);
+       }
         Cart::add(array(
         'id' => $Product->p_id,
         'name' => $Product->p_name,
         'price' => $Product->p_price_dollar,        
-        'quantity' => abs($req->qty),        
+        'quantity' => $req->qty,        
         'attributes' => array(
         'priceBitcoin' =>abs($Product->p_price_bitcoins) ,
         'priceEgy' => abs($Product->p_price_egp),
@@ -60,7 +62,7 @@ class CartController extends Controller
      
         'quantity' => array(
         'relative' => false,
-        'value' => request('qty'),
+        'value' =>request('qty'),
         )));
         $cart = Cart::getContent();
     	

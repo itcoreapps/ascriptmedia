@@ -105,7 +105,7 @@ $(document).ready(function() {
                    
                                           
 
-                                           <input type="hidden" name="qty" value="1"  min="0" >
+                                           <input type="hidden" name="qty"   min="1" >
                                            <button  type="submit" class="add-to-cart-btn addTcart "  > <i class="fa fa-shopping-cart" ></i> add to cart</button>
                   
                                              </form>

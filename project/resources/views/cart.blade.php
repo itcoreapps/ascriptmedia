@@ -48,7 +48,7 @@
                      
                     <input type="hidden" name="item_id" value="{{$item->id}}">
                    
-                    <input type="number" name="qty" value="{{$item->quantity}}" class="form-control col-sm-2  " min="0" >
+                    <input type="number" name="qty" value="{{$item->quantity}}" class="form-control col-sm-2  " min="1" >
                     <button  type="submit" class="btn btn-info " >OK</button>
                   
               </form>
