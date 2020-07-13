@@ -126,7 +126,7 @@
 													 @endif
 												</div>
 
-												<a class="delete  delCart"  href="cart/delete/{{$item->id}}" ><i class="fa fa-close"></i></a>
+												<a class="delete  delCart"  href="{{route('cart.delete', ['id' => $item->id])}}" ><i class="fa fa-close"></i></a>
 											</div>
 
 											@endforeach
@@ -136,7 +136,7 @@
 											<h5>SUBTOTAL: ${{$total}}</h5>
 										</div>
 										<div class="cart-btns">
-											<a href="cart">View Cart</a>
+											<a href="{{route('cart')}}">View Cart</a>
 											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
 										</div>
 									</div>

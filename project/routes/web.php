@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::post('/makeOrder','PaymentController@makeorder');
 
 Route::post('/addToCart','CartController@add');
-Route::get('cart','CartController@index' );
+Route::get('cart','CartController@index' )->name('cart');
 Route::post('cart/update','CartController@update' );
-Route::get('cart/delete/{id}','CartController@removeItem' );
+Route::get('cart/delete/{id}','CartController@removeItem' )->name('cart.delete');;
 Route::get('cart/destroy','CartController@destroy' );
 
 Route::get('/checkout','PaymentController@index');

@@ -31,10 +31,10 @@ class CartController extends Controller
         'id' => $Product->p_id,
         'name' => $Product->p_name,
         'price' => $Product->p_price_dollar,        
-        'quantity' => $req->qty,        
+        'quantity' => abs($req->qty),        
         'attributes' => array(
-        'priceBitcoin' =>$Product->p_price_bitcoins ,
-        'priceEgy' => $Product->p_price_egp,
+        'priceBitcoin' =>abs($Product->p_price_bitcoins) ,
+        'priceEgy' => abs($Product->p_price_egp),
         'image'=>$imageCart
         ),
         'associatedModel' => $Product

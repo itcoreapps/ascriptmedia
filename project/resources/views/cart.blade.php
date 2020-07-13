@@ -19,9 +19,9 @@
           <div class="well col-sm-12" >
             <div class="container-fluid">
               <div class="row " >             
-
-            <div class="col-sm-6 col-xs-12 col-md-3 ">
-               <a class="btn btn-danger left  "  href="cart/delete/{{$item->id}}" style="float: left;">X</a>
+<!-- //cart/delete/{{$item->id}}"
+ -->            <div class="col-sm-6 col-xs-12 col-md-3 ">
+               <a class="btn btn-danger left  "  href="{{route('cart.delete', ['id' => $item->id])}}" style="float: left;">X</a>
                <br>
              @if( $item->attributes->has('image') )
                <img src="./img/{{$item->attributes->image}}" class="rounded  d-block" alt="..." max-width="100px"  max-height="100px" height="100" width="100">

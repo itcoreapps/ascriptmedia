@@ -30,7 +30,7 @@ $(document).ready(function() {
                var string1="";
               for(var i in cartContent){
            cartContent[i].id;
-            
+            var route="{{route('cart.delete', ['id' => "+cartContent[i].id+"])}}";
             string1 +=' <div class="product-widget"><div class="product-img  ">'+
            '<img src="./img/'+cartContent[i].attributes.image+'" alt="" class="cartImg"></div>'+
                         '<div class="product-body">'+
@@ -39,8 +39,9 @@ $(document).ready(function() {
                          '<span class="cartPrice">$'+cartContent[i].price+'</span></h4>'+
                         '<span class="bitPrice">bit coin '+cartContent[i].attributes.priceBitcoin+'</span></div>'+
 
-                        '<a class="delete  delCart"  href="cart/delete/'+cartContent[i].id+'" ><i class="fa fa-close"></i></a></div>';
-            
+                        '<a class="delete  delCart"  href="'+route+'"><i class="fa fa-close"></i></a></div>';
+         
+            //cart/delete/'+cartContent[i].id
             $(".cart-list").html(string1);
              
           
